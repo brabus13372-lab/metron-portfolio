@@ -1,0 +1,880 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Metron — Python & Web Developer. Minimal portfolio." />
+    <title>Metron — Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-0: #0a0a0a;
+        --bg-1: #0d0d0d;
+        --text-0: #ffffff;
+        --text-1: #e8e8e8;
+        --text-2: #c0c0c0;
+        --text-warm: #c8cdd2;
+        --accent: #b0b8c1;
+        --border: rgba(176, 184, 193, 0.25);
+        --border-strong: rgba(176, 184, 193, 0.38);
+        --shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
+        --shadow-soft: 0 14px 46px rgba(0, 0, 0, 0.48);
+        --radius: 20px;
+        --radius-sm: 18px;
+        --container: 1120px;
+        --pad-x: clamp(18px, 4vw, 42px);
+        --pad-y: clamp(52px, 7vw, 96px);
+        --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+        --dur: 700ms;
+        --stagger-step: 80ms;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Plus Jakarta Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        font-weight: 300;
+        color: var(--text-1);
+        background: linear-gradient(180deg, var(--bg-0), var(--bg-1));
+        min-height: 100vh;
+        position: relative;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0) 22%),
+          radial-gradient(1400px 900px at 70% 20%, rgba(176, 184, 193, 0.06), rgba(176, 184, 193, 0) 60%),
+          radial-gradient(1200px 900px at 15% 85%, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0) 55%);
+        opacity: 0.85;
+      }
+
+      header,
+      main,
+      footer {
+        position: relative;
+        z-index: 2;
+      }
+
+      .cursor-glow {
+        position: fixed;
+        pointer-events: none;
+        z-index: 0;
+        width: 600px;
+        height: 600px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(176, 184, 193, 0.06) 0%, transparent 70%);
+        transform: translate(-50%, -50%);
+        transition: left 0.15s ease, top 0.15s ease;
+      }
+
+      .noise-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+        opacity: 0.025;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/feTurbulence%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        background-size: 200px 200px;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: var(--text-0);
+      }
+
+      a:focus-visible {
+        outline: 2px solid rgba(176, 184, 193, 0.65);
+        outline-offset: 3px;
+        border-radius: 10px;
+      }
+
+      ::selection {
+        background: rgba(176, 184, 193, 0.24);
+      }
+
+      .container {
+        width: min(var(--container), calc(100% - var(--pad-x) * 2));
+        margin: 0 auto;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: transparent;
+        padding: 14px 0;
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 12px 18px;
+        border-radius: 999px;
+        background: rgba(10, 10, 10, 0.58);
+        border: 1px solid rgba(176, 184, 193, 0.2);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 14px 46px rgba(0, 0, 0, 0.55);
+        transform-style: preserve-3d;
+        will-change: transform;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 10px;
+        letter-spacing: 0.02em;
+        font-weight: 400;
+        color: var(--text-0);
+      }
+
+      .brand small {
+        color: var(--text-warm);
+        font-weight: 300;
+        letter-spacing: 0.02em;
+      }
+
+      nav ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        gap: 18px;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      nav a {
+        font-size: 13px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-warm);
+        transition: color 220ms var(--ease-out);
+      }
+
+      nav a:hover {
+        color: var(--text-0);
+      }
+
+      main {
+        padding: clamp(34px, 5.2vw, 76px) 0;
+      }
+
+      section {
+        scroll-margin-top: 84px;
+      }
+
+      .section {
+        padding: var(--pad-y) 0;
+      }
+
+      .section + .section {
+        border-top: 1px solid rgba(176, 184, 193, 0.12);
+      }
+
+      .kicker {
+        font-size: 12px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin: 0 0 14px 0;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 120px;
+        padding-bottom: 80px;
+      }
+
+      .hero-inner {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: clamp(28px, 5vw, 64px);
+        align-items: center;
+      }
+
+      h1 {
+        font-size: clamp(54px, 7.2vw, 104px);
+        letter-spacing: -0.03em;
+        line-height: 0.95;
+        margin: 0;
+        font-weight: 600;
+        color: var(--text-0);
+      }
+
+      .hero-subtitle {
+        margin: 18px 0 0 0;
+        font-size: clamp(16px, 2vw, 20px);
+        line-height: 1.55;
+        color: var(--text-warm);
+        max-width: 52ch;
+      }
+
+      .hero-subtitle strong {
+        font-weight: 400;
+        color: var(--text-1);
+      }
+
+      .hero-line {
+        margin: 18px 0 0 0;
+        color: rgba(176, 184, 193, 0.86);
+        font-size: 15px;
+        letter-spacing: 0.01em;
+        line-height: 1.7;
+        max-width: 56ch;
+      }
+
+      .hero-aside {
+        border: 1px solid rgba(176, 184, 193, 0.18);
+        border-radius: var(--radius);
+        padding: 22px 22px 20px 22px;
+        background: rgba(13, 13, 13, 0.78);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .meta-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .meta-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: baseline;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(176, 184, 193, 0.1);
+      }
+
+      .meta-row:last-child {
+        border-bottom: 0;
+      }
+
+      .meta-row span {
+        font-size: 12px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(200, 205, 210, 0.72);
+      }
+
+      .meta-row a,
+      .meta-row strong {
+        font-weight: 400;
+        letter-spacing: 0.01em;
+        color: rgba(232, 232, 232, 0.9);
+      }
+
+      .meta-row a {
+        color: rgba(176, 184, 193, 0.92);
+        transition: color 220ms var(--ease-out);
+      }
+
+      .meta-row a:hover {
+        color: var(--text-0);
+      }
+
+      .content {
+        max-width: 72ch;
+      }
+
+      .content p {
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.85;
+        color: rgba(232, 232, 232, 0.82);
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 22px;
+      }
+
+      .card {
+        position: relative;
+        border-radius: var(--radius);
+        border: 1px solid var(--border);
+        background: rgba(13, 13, 13, 0.78);
+        padding: 22px 22px 20px 22px;
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+        transform: translateY(0) scale(1);
+        transform-style: preserve-3d;
+        will-change: transform;
+        transition:
+          transform 260ms var(--ease-out),
+          box-shadow 260ms var(--ease-out),
+          border-color 260ms var(--ease-out);
+      }
+
+      .card:hover {
+        transform: translateY(-1px) scale(1.02);
+        border-color: var(--border-strong);
+        box-shadow: 0 20px 72px rgba(0, 0, 0, 0.58);
+      }
+
+      .card h3 {
+        margin: 2px 0 12px 0;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--text-0);
+        letter-spacing: -0.01em;
+      }
+
+      .card p {
+        margin: 0 0 14px 0;
+        color: rgba(232, 232, 232, 0.78);
+        line-height: 1.75;
+        font-size: 14.5px;
+      }
+
+      .card .stackline {
+        margin: 0 0 14px 0;
+        color: rgba(176, 184, 193, 0.92);
+        font-size: 12.5px;
+        letter-spacing: 0.01em;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(176, 184, 193, 0.26);
+        color: rgba(176, 184, 193, 0.98);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .links-row {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-top: 14px;
+      }
+
+      .link {
+        display: inline-flex;
+        gap: 10px;
+        align-items: center;
+        padding: 10px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(176, 184, 193, 0.26);
+        background: rgba(10, 10, 10, 0.28);
+        color: rgba(176, 184, 193, 0.98);
+        transition:
+          transform 220ms var(--ease-out),
+          background-color 220ms var(--ease-out),
+          border-color 220ms var(--ease-out),
+          color 220ms var(--ease-out);
+        font-size: 13px;
+      }
+
+      .link:hover {
+        transform: translateY(-1px);
+        background: rgba(176, 184, 193, 0.15);
+        border-color: rgba(176, 184, 193, 0.42);
+        color: var(--text-0);
+      }
+
+      .link .arrow {
+        opacity: 0.7;
+      }
+
+      .tags-grid {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 18px;
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        padding: 10px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(176, 184, 193, 0.25);
+        background: rgba(13, 13, 13, 0.62);
+        color: rgba(176, 184, 193, 0.96);
+        font-size: 13px;
+        letter-spacing: 0.02em;
+      }
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-top: 16px;
+      }
+
+      .contact-row {
+        display: flex;
+        gap: 12px;
+        align-items: baseline;
+        justify-content: space-between;
+        padding: 14px 16px;
+        border-radius: var(--radius-sm);
+        border: 1px solid rgba(176, 184, 193, 0.14);
+        background: rgba(13, 13, 13, 0.55);
+      }
+
+      .contact-row span {
+        font-size: 12px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: rgba(176, 184, 193, 0.9);
+      }
+
+      .contact-row a {
+        color: rgba(176, 184, 193, 0.95);
+        transition: color 220ms var(--ease-out);
+      }
+
+      .contact-row a:hover {
+        color: var(--text-0);
+      }
+
+      footer {
+        padding: 34px 0 54px 0;
+        border-top: 1px solid rgba(176, 184, 193, 0.12);
+        color: rgba(200, 205, 210, 0.72);
+        font-size: 13px;
+      }
+
+      #about.section {
+        padding-top: clamp(34px, 5vw, 66px);
+      }
+
+      .footer-inner {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+          opacity var(--dur) var(--ease-out),
+          transform var(--dur) var(--ease-out);
+        will-change: transform, opacity;
+      }
+
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .stagger .reveal-item {
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+          opacity var(--dur) var(--ease-out),
+          transform var(--dur) var(--ease-out);
+        transition-delay: calc(var(--i, 0) * var(--stagger-step));
+        will-change: transform, opacity;
+      }
+
+      .stagger.is-visible .reveal-item {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .hero-reveal {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      .hero-reveal.is-on {
+        opacity: 1;
+        transform: translateY(0);
+        transition:
+          opacity 900ms var(--ease-out),
+          transform 900ms var(--ease-out);
+      }
+
+      .reveal-text {
+        display: inline-block;
+        white-space: nowrap;
+      }
+
+      .reveal-text .token {
+        display: inline-block;
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      .reveal-text.is-on .token {
+        opacity: 1;
+        transform: translateY(0);
+        transition:
+          opacity 900ms var(--ease-out),
+          transform 900ms var(--ease-out);
+        transition-delay: var(--d, 0ms);
+      }
+
+      @media (max-width: 920px) {
+        .hero-inner {
+          grid-template-columns: 1fr;
+          align-items: start;
+        }
+
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        .reveal,
+        .stagger .reveal-item,
+        .hero-reveal,
+        .reveal-text .token {
+          transition: none !important;
+          transform: none !important;
+          opacity: 1 !important;
+        }
+
+        body::before {
+          opacity: 0.45;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="nav">
+          <a class="brand" href="#top" aria-label="Back to top">
+            Metron <small>Python & Web Developer</small>
+          </a>
+          <nav aria-label="Primary">
+            <ul>
+              <li><a href="#about">About</a></li>
+              <li><a href="#projects">Projects</a></li>
+              <li><a href="#stack">Stack</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="container hero">
+        <div class="hero-inner">
+          <div>
+            <div class="hero-reveal" data-hero>
+              <h1 class="reveal-text" data-reveal-text="Metron">Metron</h1>
+              <p class="hero-subtitle">
+                <strong>Python Developer.</strong> Building real tools.
+              </p>
+              <p class="hero-line">I write clean systems — bots, backends, and web.</p>
+            </div>
+          </div>
+          <aside class="hero-aside reveal stagger" data-reveal data-stagger>
+            <div class="meta-grid">
+              <div class="meta-row reveal-item">
+                <span>Role</span>
+                <strong>Python & Web Developer</strong>
+              </div>
+              <div class="meta-row reveal-item">
+                <span>Stack</span>
+                <strong>Python · Web · PostgreSQL</strong>
+              </div>
+              <div class="meta-row reveal-item">
+                <span>GitHub</span>
+                <a href="https://github.com/brabus13372-lab" target="_blank" rel="noreferrer">brabus13372-lab</a>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="about" class="section">
+        <div class="container">
+          <div class="reveal stagger" data-reveal data-stagger>
+            <p class="kicker reveal-item">About</p>
+            <div class="content reveal-item">
+              <p>
+                I focus on Python and web. I build things that actually work — from backend automation to production
+                Telegram services. Currently exploring lower-level languages like Rust and C.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="section">
+        <div class="container">
+          <div class="reveal stagger" data-reveal data-stagger>
+            <p class="kicker reveal-item">Projects</p>
+            <div class="projects-grid">
+              <article class="card reveal-item">
+                <div class="pill">Production · Open Source</div>
+                <h3>Metron VPN</h3>
+                <p>
+                  Telegram bot for automated VLESS/REALITY VPN access via 3x-ui panel. Features: daily billing engine,
+                  YooKassa payments, key rotation, FSM support tickets, global log sanitizer.
+                </p>
+                <div class="stackline">
+                  Python · aiogram 3.x · PostgreSQL · aiohttp · APScheduler · YooKassa
+                </div>
+                <div class="links-row">
+                  <a class="link" href="https://github.com/brabus13372-lab/Metron-vpn" target="_blank" rel="noreferrer">
+                    GitHub <span class="arrow">↗</span>
+                  </a>
+                </div>
+              </article>
+
+              <article class="card reveal-item">
+                <div class="pill">Web · Client Work</div>
+                <h3>nvfstudio</h3>
+                <p>Landing page for an art & design business. Clean, visual, conversion-focused.</p>
+                <div class="stackline">HTML · CSS · JavaScript</div>
+                <div class="links-row">
+                  <a class="link" href="https://nvfstudio.ru" target="_blank" rel="noreferrer">
+                    Live <span class="arrow">↗</span>
+                  </a>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="stack" class="section">
+        <div class="container">
+          <div class="reveal stagger" data-reveal data-stagger>
+            <p class="kicker reveal-item">Stack</p>
+            <div class="tags-grid">
+              <span class="tag reveal-item">Python</span>
+              <span class="tag reveal-item">HTML/CSS</span>
+              <span class="tag reveal-item">PostgreSQL</span>
+              <span class="tag reveal-item">aiogram</span>
+              <span class="tag reveal-item">aiohttp</span>
+              <span class="tag reveal-item">Linux</span>
+              <span class="tag reveal-item">asyncio</span>
+              <span class="tag reveal-item">APScheduler</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="my-projects" class="section">
+        <div class="container">
+          <div class="reveal stagger" data-reveal data-stagger>
+            <p class="kicker reveal-item">My Projects</p>
+            <div class="projects-grid">
+              <article class="card tilt-card reveal-item">
+                <div class="pill">Telegram · Channel</div>
+                <h3>MetronVPN</h3>
+                <p>Official channel. Updates, announcements and service news.</p>
+                <div class="links-row">
+                  <a class="link" href="https://t.me/metronVPN" target="_blank" rel="noreferrer">
+                    Open →
+                  </a>
+                </div>
+              </article>
+
+              <article class="card tilt-card reveal-item">
+                <div class="pill">Telegram · Bot</div>
+                <h3>@MetronVPN_bot</h3>
+                <p>The bot itself. Connect, manage your subscription and top up balance.</p>
+                <div class="links-row">
+                  <a class="link" href="https://t.me/MetronVPN_bot" target="_blank" rel="noreferrer">
+                    Open →
+                  </a>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section">
+        <div class="container">
+          <div class="reveal stagger" data-reveal data-stagger>
+            <p class="kicker reveal-item">Contact / Links</p>
+            <div class="contact-grid">
+              <div class="contact-row reveal-item">
+                <span>GitHub</span>
+                <a href="https://github.com/brabus13372-lab" target="_blank" rel="noreferrer">
+                  github.com/brabus13372-lab
+                </a>
+              </div>
+              <div class="contact-row reveal-item">
+                <span>Telegram</span>
+                <a href="https://t.me/filactery" target="_blank" rel="noreferrer">@filactery</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="footer-inner">
+          <span>© <span id="year"></span> Metron</span>
+          <a href="#top">Back to top</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+      const setStaggerIndexes = () => {
+        document.querySelectorAll("[data-stagger]").forEach((group) => {
+          const items = Array.from(group.querySelectorAll(".reveal-item"))
+          items.forEach((el, idx) => el.style.setProperty("--i", String(idx)))
+        })
+      }
+
+      const setupRevealText = () => {
+        const els = document.querySelectorAll("[data-reveal-text]")
+        els.forEach((el) => {
+          const text = el.getAttribute("data-reveal-text") || el.textContent || ""
+          el.textContent = ""
+          el.classList.add("reveal-text")
+          const tokens = Array.from(text)
+          tokens.forEach((ch, idx) => {
+            const span = document.createElement("span")
+            span.className = "token"
+            span.textContent = ch
+            span.style.setProperty("--d", `${idx * 48}ms`)
+            el.appendChild(span)
+          })
+        })
+      }
+
+      const setupObservers = () => {
+        const targets = document.querySelectorAll("[data-reveal]")
+
+        if (prefersReducedMotion) {
+          targets.forEach((el) => el.classList.add("is-visible"))
+          return
+        }
+
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return
+              entry.target.classList.add("is-visible")
+              io.unobserve(entry.target)
+            })
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -6% 0px" }
+        )
+
+        targets.forEach((el) => io.observe(el))
+      }
+
+      const runHero = () => {
+        const hero = document.querySelector("[data-hero]")
+        const title = document.querySelector("[data-reveal-text]")
+        if (!hero) return
+
+        if (prefersReducedMotion) {
+          hero.classList.add("is-on")
+          if (title) title.classList.add("is-on")
+          return
+        }
+
+        requestAnimationFrame(() => {
+          hero.classList.add("is-on")
+          if (title) title.classList.add("is-on")
+        })
+      }
+
+      const setYear = () => {
+        const el = document.getElementById("year")
+        if (el) el.textContent = String(new Date().getFullYear())
+      }
+
+      setupRevealText()
+      setStaggerIndexes()
+      setupObservers()
+      runHero()
+      setYear()
+
+      const setupVisualEnhancements = () => {
+        if (prefersReducedMotion) return
+        if (!window.matchMedia("(pointer: fine)").matches) return
+
+        const noise = document.createElement("div")
+        noise.className = "noise-overlay"
+        document.body.appendChild(noise)
+
+        const glow = document.createElement("div")
+        glow.className = "cursor-glow"
+        document.body.appendChild(glow)
+
+        document.addEventListener("mousemove", (e) => {
+          glow.style.left = e.clientX + "px"
+          glow.style.top = e.clientY + "px"
+        })
+
+        const applyTilt = (el, maxTilt = 8) => {
+          const onMove = (e) => {
+            const rect = el.getBoundingClientRect()
+            const x = (e.clientX - rect.left) / rect.width - 0.5
+            const y = (e.clientY - rect.top) / rect.height - 0.5
+            el.style.transition = "transform 0.12s ease"
+            el.style.transform = `perspective(800px) rotateY(${x * maxTilt}deg) rotateX(${-y * maxTilt}deg) scale(1.02)`
+          }
+
+          const onLeave = () => {
+            el.style.transition = "transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)"
+            el.style.removeProperty("transform")
+            window.setTimeout(() => el.style.removeProperty("transition"), 520)
+          }
+
+          el.addEventListener("mousemove", onMove)
+          el.addEventListener("mouseleave", onLeave)
+        }
+
+        document.querySelectorAll(".card, .tilt-card").forEach((el) => applyTilt(el, 8))
+        const nav = document.querySelector(".nav")
+        if (nav) applyTilt(nav, 3)
+      }
+
+      setupVisualEnhancements()
+    </script>
+  </body>
+</html>
