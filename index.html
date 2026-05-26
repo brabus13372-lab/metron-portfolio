@@ -1,1355 +1,137 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="snap-root">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Metron - black background, silver typography, premium backend systems, billing, automation, and Telegram products."
+      content="Metron builds calm backend systems, billing flows, Telegram products, and minimal premium interfaces."
     />
-    <title>Metron - Noir Systems</title>
+    <title>Metron — Systems</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,600;6..96,700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap"
       rel="stylesheet"
     />
-    <style>
-      :root {
-        --bg-0: #000000;
-        --bg-1: #040506;
-        --bg-2: #090b0d;
-        --bg-3: #101317;
-        --surface-0: rgba(10, 12, 14, 0.7);
-        --surface-1: rgba(15, 18, 21, 0.88);
-        --surface-2: rgba(21, 25, 29, 0.94);
-        --text-0: #f5f7f8;
-        --text-1: #dfe4ea;
-        --text-2: #b8c0c9;
-        --text-3: #808a95;
-        --line: rgba(223, 228, 234, 0.1);
-        --line-strong: rgba(223, 228, 234, 0.22);
-        --shadow-soft: 0 24px 72px rgba(0, 0, 0, 0.42);
-        --shadow-deep: 0 46px 140px rgba(0, 0, 0, 0.68);
-        --shine:
-          linear-gradient(
-            130deg,
-            rgba(255, 255, 255, 0.2),
-            rgba(255, 255, 255, 0.02) 34%,
-            rgba(146, 156, 168, 0.1) 72%,
-            rgba(255, 255, 255, 0.16)
-          );
-        --chrome:
-          linear-gradient(
-            180deg,
-            #ffffff 0%,
-            #dee3e8 17%,
-            #a7b0ba 38%,
-            #f8fafc 58%,
-            #6f7884 100%
-          );
-        --radius: 34px;
-        --radius-md: 26px;
-        --radius-sm: 20px;
-        --container: 1220px;
-        --pad-x: clamp(18px, 4vw, 44px);
-        --pad-y: clamp(78px, 10vw, 148px);
-        --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-        --dur: 820ms;
-        --stagger-step: 90ms;
-        --mx: 50vw;
-        --my: 20vh;
-      }
-
-      * { box-sizing: border-box; }
-
-      html { scroll-behavior: smooth; }
-
-      body {
-        margin: 0;
-        min-height: 100vh;
-        overflow-x: hidden;
-        position: relative;
-        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        color: var(--text-1);
-        background:
-          radial-gradient(980px 780px at 78% 10%, rgba(255, 255, 255, 0.08), transparent 58%),
-          radial-gradient(860px 720px at 14% 86%, rgba(122, 132, 145, 0.1), transparent 64%),
-          linear-gradient(180deg, var(--bg-0), var(--bg-1) 20%, var(--bg-2) 56%, var(--bg-3) 100%);
-      }
-
-      body::before,
-      body::after {
-        content: "";
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-      }
-
-      body::before {
-        z-index: 0;
-        opacity: 0.86;
-        background:
-          radial-gradient(860px 560px at var(--mx) var(--my), rgba(255, 255, 255, 0.07), transparent 64%),
-          linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0) 22%);
-      }
-
-      body::after {
-        z-index: 1;
-        opacity: 0.08;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.05' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
-        mix-blend-mode: soft-light;
-      }
-
-      .ambient-grid,
-      .ambient-glow {
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-      }
-
-      .ambient-grid {
-        z-index: 1;
-        opacity: 0.12;
-        background:
-          linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
-        background-size: 120px 120px;
-        mask-image: radial-gradient(circle at 50% 18%, black 18%, transparent 68%);
-      }
-
-      .ambient-glow {
-        z-index: 1;
-        background: radial-gradient(680px 680px at var(--mx) var(--my), rgba(255, 255, 255, 0.08), transparent 70%);
-      }
-
-      header,
-      main,
-      footer {
-        position: relative;
-        z-index: 2;
-      }
-
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-
-      a:focus-visible {
-        outline: 2px solid rgba(255, 255, 255, 0.42);
-        outline-offset: 4px;
-        border-radius: 12px;
-      }
-
-      ::selection {
-        background: rgba(255, 255, 255, 0.16);
-        color: var(--text-0);
-      }
-
-      .container {
-        width: min(var(--container), calc(100% - var(--pad-x) * 2));
-        margin: 0 auto;
-      }
-
-      .mono,
-      .eyebrow,
-      .brand small,
-      nav a,
-      .meta-label,
-      .panel-label,
-      .spec-label,
-      .feature-card span,
-      .cap-card span,
-      .contact-card span {
-        font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
-      }
-
-      .display {
-        font-family: "Bodoni Moda", Georgia, serif;
-        font-optical-sizing: auto;
-      }
-
-      .chrome-text {
-        color: transparent;
-        background-image: var(--chrome);
-        -webkit-background-clip: text;
-        background-clip: text;
-        text-shadow: 0 0 30px rgba(255, 255, 255, 0.08);
-      }
-
-      .eyebrow,
-      .panel-label,
-      .meta-label,
-      .spec-label,
-      .feature-card span,
-      .cap-card span,
-      .contact-card span {
-        display: inline-flex;
-        align-items: center;
-        gap: 12px;
-        margin: 0;
-        font-size: 11px;
-        letter-spacing: 0.24em;
-        text-transform: uppercase;
-        color: var(--text-2);
-      }
-
-      .eyebrow::before,
-      .panel-label::before,
-      .meta-label::before,
-      .spec-label::before,
-      .feature-card span::before,
-      .cap-card span::before,
-      .contact-card span::before {
-        content: "";
-        width: 24px;
-        height: 1px;
-        background: linear-gradient(90deg, rgba(255, 255, 255, 0.48), rgba(255, 255, 255, 0));
-      }
-
-      .surface {
-        position: relative;
-        overflow: hidden;
-        border: 1px solid var(--line);
-        background: linear-gradient(180deg, rgba(16, 18, 21, 0.82), rgba(8, 10, 12, 0.9));
-        box-shadow: var(--shadow-soft);
-      }
-
-      .surface::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: var(--shine);
-        opacity: 0.12;
-        pointer-events: none;
-      }
-
-      .surface::after {
-        content: "";
-        position: absolute;
-        inset: 12px;
-        border-radius: inherit;
-        border: 1px solid rgba(255, 255, 255, 0.04);
-        pointer-events: none;
-      }
-
-      .surface > * {
-        position: relative;
-        z-index: 1;
-      }
-
-      .site-header {
-        position: sticky;
-        top: 0;
-        z-index: 40;
-        padding-top: 16px;
-      }
-
-      .site-nav {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 18px;
-        min-height: 72px;
-        padding: 12px 18px 12px 20px;
-        border-radius: 24px;
-        backdrop-filter: blur(18px);
-        background: rgba(7, 9, 11, 0.62);
-      }
-
-      .brand {
-        display: inline-flex;
-        flex-direction: column;
-        gap: 4px;
-      }
-
-      .brand strong {
-        color: var(--text-0);
-        font-size: 15px;
-        line-height: 1;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-      }
-
-      .brand small {
-        color: var(--text-3);
-        font-size: 10px;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-      }
-
-      nav ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-        gap: 18px;
-      }
-
-      nav a {
-        display: inline-flex;
-        align-items: center;
-        min-height: 36px;
-        color: var(--text-3);
-        font-size: 11px;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        transition: color 180ms var(--ease-out);
-      }
-
-      nav a:hover { color: var(--text-0); }
-
-      main { padding-top: 24px; }
-
-      section { scroll-margin-top: 92px; }
-
-      .section {
-        padding: var(--pad-y) 0;
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
-      }
-
-      .section:first-of-type { border-top: 0; }
-
-      .section-heading {
-        display: grid;
-        gap: 14px;
-        max-width: 68ch;
-      }
-
-      .section-heading h2 {
-        margin: 0;
-        font-size: clamp(36px, 5.4vw, 76px);
-        line-height: 0.94;
-        letter-spacing: -0.05em;
-        color: var(--text-0);
-        font-weight: 700;
-      }
-
-      .section-heading p {
-        margin: 0;
-        font-size: clamp(16px, 1.5vw, 19px);
-        line-height: 1.85;
-        color: rgba(223, 228, 234, 0.76);
-      }
-
-      .hero {
-        padding-top: clamp(64px, 9vw, 126px);
-        padding-bottom: clamp(86px, 11vw, 156px);
-      }
-
-      .hero-grid {
-        display: grid;
-        grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
-        gap: clamp(28px, 5vw, 66px);
-        align-items: center;
-      }
-
-      .hero-copy {
-        display: grid;
-        gap: 30px;
-      }
-
-      .hero-title {
-        margin: 0;
-        display: grid;
-        gap: 8px;
-        font-size: clamp(62px, 11vw, 142px);
-        line-height: 0.84;
-        letter-spacing: -0.08em;
-        color: var(--text-0);
-      }
-
-      .hero-title .line {
-        display: block;
-      }
-
-      .hero-title .line:nth-child(2) {
-        padding-left: clamp(14px, 3vw, 44px);
-      }
-
-      .hero-title .line:nth-child(3) {
-        padding-left: clamp(36px, 7vw, 108px);
-      }
-
-      .hero-lead {
-        max-width: 58ch;
-        margin: 0;
-        font-size: clamp(18px, 2vw, 22px);
-        line-height: 1.78;
-        color: rgba(223, 228, 234, 0.84);
-      }
-
-      .hero-lead strong {
-        color: var(--text-0);
-        font-weight: 600;
-      }
-
-      .hero-note {
-        max-width: 58ch;
-        margin: 0;
-        font-size: 15px;
-        line-height: 1.8;
-        color: var(--text-3);
-      }
-
-      .actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 14px;
-      }
-
-      .action {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        min-height: 48px;
-        padding: 0 18px;
-        border-radius: 999px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        background: rgba(16, 19, 22, 0.82);
-        color: rgba(245, 247, 248, 0.92);
-        transition:
-          transform 220ms var(--ease-out),
-          border-color 220ms var(--ease-out),
-          background-color 220ms var(--ease-out);
-      }
-
-      .action.primary {
-        border-color: rgba(255, 255, 255, 0.2);
-        background: linear-gradient(180deg, rgba(234, 239, 244, 0.16), rgba(134, 145, 157, 0.06));
-      }
-
-      .action:hover {
-        transform: translateY(-2px);
-        border-color: rgba(255, 255, 255, 0.28);
-        background: rgba(18, 22, 26, 0.95);
-      }
-
-      .hero-meta {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 14px;
-      }
-
-      .meta-card {
-        padding: 18px 18px 20px 18px;
-        border-radius: 22px;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        background: rgba(10, 12, 15, 0.64);
-      }
-
-      .meta-card strong {
-        display: block;
-        margin-top: 14px;
-        color: var(--text-0);
-        font-size: 15px;
-        line-height: 1.65;
-        font-weight: 500;
-      }
-
-      .hero-stage {
-        min-height: 720px;
-        padding: 28px;
-        border-radius: 40px;
-        background:
-          radial-gradient(circle at 52% 38%, rgba(255, 255, 255, 0.09), transparent 28%),
-          linear-gradient(180deg, rgba(18, 20, 24, 0.98), rgba(6, 7, 9, 0.98));
-        box-shadow: var(--shadow-deep);
-      }
-
-      .hero-stage::before {
-        opacity: 0.16;
-      }
-
-      .stage-head {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 24px;
-      }
-
-      .stage-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        min-height: 34px;
-        padding: 0 14px;
-        border-radius: 999px;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        background: rgba(9, 11, 13, 0.74);
-        font-size: 11px;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: var(--text-2);
-      }
-
-      .stage-badge::before {
-        content: "";
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: linear-gradient(180deg, #ffffff, #83909b);
-        box-shadow: 0 0 14px rgba(255, 255, 255, 0.44);
-      }
-
-      .hero-monolith {
-        position: relative;
-        min-height: 430px;
-        border-radius: 30px;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        background:
-          linear-gradient(180deg, rgba(28, 31, 35, 0.92), rgba(10, 12, 14, 0.96));
-        overflow: hidden;
-      }
-
-      .hero-monolith::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background:
-          radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0) 34%),
-          linear-gradient(90deg, rgba(255, 255, 255, 0.04), transparent 12%, transparent 88%, rgba(255, 255, 255, 0.04));
-      }
-
-      .hero-monolith::after {
-        content: "";
-        position: absolute;
-        inset: 18px;
-        border: 1px solid rgba(255, 255, 255, 0.06);
-        border-radius: 24px;
-      }
-
-      .monolith-grid,
-      .monolith-glow {
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-      }
-
-      .monolith-grid {
-        opacity: 0.14;
-        background:
-          linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-        background-size: 64px 64px;
-        mask-image: radial-gradient(circle at 50% 50%, black 18%, transparent 70%);
-      }
-
-      .monolith-glow {
-        background: radial-gradient(circle at 50% 46%, rgba(255, 255, 255, 0.12), transparent 42%);
-        filter: blur(32px);
-      }
-
-      .monolith-mark {
-        position: absolute;
-        inset: 50%;
-        transform: translate(-50%, -52%);
-        font-family: "Bodoni Moda", Georgia, serif;
-        font-size: clamp(170px, 24vw, 280px);
-        line-height: 1;
-        letter-spacing: -0.08em;
-        color: rgba(255, 255, 255, 0.05);
-        text-shadow: 0 24px 60px rgba(0, 0, 0, 0.38);
-      }
-
-      .monolith-copy {
-        position: absolute;
-        inset: auto 26px 28px 26px;
-        display: grid;
-        gap: 14px;
-      }
-
-      .monolith-copy strong {
-        display: block;
-        font-size: clamp(28px, 4vw, 50px);
-        line-height: 0.94;
-        letter-spacing: -0.05em;
-        color: var(--text-0);
-      }
-
-      .monolith-copy p {
-        margin: 0;
-        max-width: 32ch;
-        font-size: 15px;
-        line-height: 1.8;
-        color: rgba(223, 228, 234, 0.72);
-      }
-
-      .monolith-chip {
-        position: absolute;
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        min-height: 40px;
-        padding: 0 16px;
-        border-radius: 999px;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        background: rgba(8, 10, 12, 0.8);
-        color: rgba(245, 247, 248, 0.86);
-        font-size: 11px;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.32);
-      }
-
-      .monolith-chip::before {
-        content: "";
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: linear-gradient(180deg, #ffffff, #8995a0);
-      }
-
-      .chip-a { top: 18%; right: 6%; }
-      .chip-b { left: 2%; bottom: 30%; }
-      .chip-c { right: 8%; bottom: 18%; }
-
-      .stage-specs {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 14px;
-        margin-top: 18px;
-      }
-
-      .spec-card {
-        padding: 18px;
-        border-radius: 22px;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        background: rgba(9, 11, 13, 0.72);
-      }
-
-      .spec-card strong {
-        display: block;
-        margin-top: 12px;
-        color: var(--text-0);
-        font-size: 15px;
-        line-height: 1.6;
-        font-weight: 600;
-      }
-
-      .spec-card p {
-        margin: 8px 0 0 0;
-        color: var(--text-3);
-        font-size: 13px;
-        line-height: 1.72;
-      }
-
-      .manifesto-grid {
-        display: grid;
-        grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
-        gap: 20px;
-        margin-top: 34px;
-      }
-
-      .manifesto-card,
-      .quote-card,
-      .flagship-card,
-      .feature-card,
-      .cap-card,
-      .contact-card,
-      .contact-shell {
-        border-radius: var(--radius);
-        padding: clamp(24px, 4vw, 38px);
-      }
-
-      .manifesto-card p,
-      .quote-card p,
-      .feature-card p,
-      .cap-card p,
-      .contact-card p {
-        margin: 14px 0 0 0;
-        color: rgba(223, 228, 234, 0.76);
-        font-size: 16px;
-        line-height: 1.9;
-      }
-
-      .manifesto-card strong,
-      .quote-card strong {
-        display: block;
-        margin-top: 16px;
-        font-size: clamp(30px, 4vw, 58px);
-        line-height: 0.96;
-        letter-spacing: -0.05em;
-        color: var(--text-0);
-      }
-
-      .quote-card strong {
-        max-width: 10ch;
-      }
-
-      .flagship-card {
-        margin-top: 34px;
-        padding: clamp(26px, 4vw, 46px);
-      }
-
-      .flagship-grid {
-        display: grid;
-        grid-template-columns: minmax(0, 1.08fr) minmax(330px, 0.92fr);
-        gap: 22px;
-      }
-
-      .flagship-copy h3 {
-        margin: 16px 0 14px 0;
-        font-size: clamp(34px, 4.2vw, 70px);
-        line-height: 0.92;
-        letter-spacing: -0.06em;
-        color: var(--text-0);
-      }
-
-      .flagship-copy p {
-        margin: 0;
-        max-width: 60ch;
-        color: rgba(223, 228, 234, 0.76);
-        font-size: 16px;
-        line-height: 1.9;
-      }
-
-      .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 14px;
-        margin-top: 28px;
-      }
-
-      .stat-card {
-        padding: 18px;
-        border-radius: 22px;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        background: rgba(8, 10, 12, 0.66);
-      }
-
-      .stat-card strong {
-        display: block;
-        margin-top: 12px;
-        color: var(--text-0);
-        font-size: 14px;
-        line-height: 1.72;
-        font-weight: 500;
-      }
-
-      .links-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        margin-top: 26px;
-      }
-
-      .stack-column {
-        display: grid;
-        gap: 14px;
-      }
-
-      .stack-card {
-        padding: 18px 18px 20px 18px;
-        border-radius: 22px;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        background: rgba(8, 10, 12, 0.72);
-      }
-
-      .stack-card strong {
-        display: block;
-        margin-top: 10px;
-        color: var(--text-0);
-        font-size: 16px;
-        line-height: 1.58;
-      }
-
-      .stack-card p {
-        margin: 8px 0 0 0;
-        color: var(--text-3);
-        font-size: 14px;
-        line-height: 1.75;
-      }
-
-      .feature-grid,
-      .cap-grid,
-      .contact-grid {
-        display: grid;
-        gap: 18px;
-        margin-top: 32px;
-      }
-
-      .feature-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .feature-card h3,
-      .cap-card h3,
-      .contact-card h3 {
-        margin: 16px 0 10px 0;
-        color: var(--text-0);
-        font-size: clamp(26px, 3vw, 40px);
-        line-height: 0.98;
-        letter-spacing: -0.04em;
-      }
-
-      .detail-list {
-        margin: 18px 0 0 0;
-        padding: 0;
-        list-style: none;
-        display: grid;
-        gap: 12px;
-      }
-
-      .detail-list li {
-        padding-top: 12px;
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
-      }
-
-      .detail-list strong {
-        display: block;
-        margin-bottom: 4px;
-        color: var(--text-0);
-        font-size: 13px;
-        line-height: 1.6;
-      }
-
-      .detail-list span {
-        color: rgba(223, 228, 234, 0.72);
-        font-size: 14px;
-        line-height: 1.72;
-      }
-
-      .cap-grid {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-      }
-
-      .cap-card p {
-        font-size: 15px;
-        line-height: 1.82;
-      }
-
-      .contact-shell {
-        display: grid;
-        grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
-        gap: 24px;
-        margin-top: 34px;
-        padding: clamp(28px, 5vw, 52px);
-      }
-
-      .contact-copy h2 {
-        margin: 18px 0 14px 0;
-        color: var(--text-0);
-        font-size: clamp(40px, 6vw, 96px);
-        line-height: 0.9;
-        letter-spacing: -0.06em;
-      }
-
-      .contact-copy p {
-        margin: 0;
-        max-width: 56ch;
-        color: rgba(223, 228, 234, 0.76);
-        font-size: 18px;
-        line-height: 1.84;
-      }
-
-      .contact-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .contact-card a {
-        display: inline-block;
-        margin-top: 16px;
-        color: var(--text-0);
-        font-size: clamp(24px, 3vw, 34px);
-        line-height: 1;
-        letter-spacing: -0.04em;
-      }
-
-      .surface,
-      .meta-card,
-      .stat-card,
-      .spec-card,
-      .stack-card {
-        transition:
-          transform 260ms var(--ease-out),
-          border-color 260ms var(--ease-out),
-          background-color 260ms var(--ease-out);
-      }
-
-      .manifesto-card:hover,
-      .quote-card:hover,
-      .feature-card:hover,
-      .cap-card:hover,
-      .contact-card:hover,
-      .spec-card:hover,
-      .stack-card:hover,
-      .meta-card:hover {
-        transform: translateY(-4px);
-        border-color: var(--line-strong);
-      }
-
-      .footer {
-        padding: 26px 0 48px 0;
-      }
-
-      .footer-inner {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 12px;
-        padding-top: 20px;
-        border-top: 1px solid rgba(255, 255, 255, 0.06);
-        color: var(--text-3);
-        font-size: 13px;
-      }
-
-      .reveal {
-        opacity: 0;
-        transform: translateY(38px);
-        transition:
-          opacity var(--dur) var(--ease-out),
-          transform var(--dur) var(--ease-out);
-        will-change: transform, opacity;
-      }
-
-      .reveal.is-visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      .stagger .reveal-item {
-        opacity: 0;
-        transform: translateY(36px);
-        transition:
-          opacity var(--dur) var(--ease-out),
-          transform var(--dur) var(--ease-out);
-        transition-delay: calc(var(--i, 0) * var(--stagger-step));
-      }
-
-      .stagger.is-visible .reveal-item {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      .hero-reveal {
-        opacity: 0;
-        transform: translateY(24px);
-      }
-
-      .hero-reveal.is-on {
-        opacity: 1;
-        transform: translateY(0);
-        transition:
-          opacity 940ms var(--ease-out),
-          transform 940ms var(--ease-out);
-      }
-
-      .reveal-text {
-        display: block;
-        white-space: normal;
-      }
-
-      .reveal-text .token {
-        display: inline-block;
-        opacity: 0;
-        transform: translateY(26px);
-      }
-
-      .reveal-text.is-on .token {
-        opacity: 1;
-        transform: translateY(0);
-        transition:
-          opacity 900ms var(--ease-out),
-          transform 900ms var(--ease-out);
-        transition-delay: var(--d, 0ms);
-      }
-
-      @media (max-width: 1180px) {
-        .hero-grid,
-        .manifesto-grid,
-        .flagship-grid,
-        .contact-shell {
-          grid-template-columns: 1fr;
-        }
-
-        .cap-grid {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-      }
-
-      @media (max-width: 920px) {
-        .site-nav {
-          flex-direction: column;
-          align-items: flex-start;
-        }
-
-        nav ul {
-          gap: 12px;
-          justify-content: flex-start;
-        }
-
-        .hero-meta,
-        .stats-grid,
-        .feature-grid,
-        .contact-grid,
-        .stage-specs {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      @media (max-width: 640px) {
-        .hero-title .line:nth-child(2),
-        .hero-title .line:nth-child(3) {
-          padding-left: 0;
-        }
-
-        .hero-stage,
-        .manifesto-card,
-        .quote-card,
-        .flagship-card,
-        .feature-card,
-        .cap-card,
-        .contact-card,
-        .contact-shell {
-          padding: 22px;
-        }
-
-        .hero-stage {
-          min-height: 620px;
-        }
-
-        .monolith-mark {
-          font-size: 168px;
-        }
-
-        .chip-a {
-          top: 18%;
-          right: 3%;
-        }
-
-        .chip-b {
-          left: 5%;
-          bottom: 28%;
-        }
-
-        .chip-c {
-          right: 4%;
-          bottom: 14%;
-        }
-
-        .cap-grid {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        html { scroll-behavior: auto; }
-
-        .reveal,
-        .stagger .reveal-item,
-        .hero-reveal,
-        .reveal-text .token,
-        .manifesto-card,
-        .quote-card,
-        .feature-card,
-        .cap-card,
-        .contact-card,
-        .meta-card,
-        .spec-card,
-        .stack-card {
-          transition: none !important;
-          transform: none !important;
-          opacity: 1 !important;
-        }
-
-        body::before,
-        body::after,
-        .ambient-grid,
-        .ambient-glow { opacity: 0.3; }
-      }
-    </style>
+    <link rel="stylesheet" href="assets/css/main.css" />
   </head>
   <body>
-    <div class="ambient-grid" aria-hidden="true"></div>
-    <div class="ambient-glow" aria-hidden="true"></div>
+    <div class="progress" data-progress aria-hidden="true"></div>
 
-    <header class="site-header">
-      <div class="container">
-        <div class="site-nav surface">
-          <a class="brand" href="#top" aria-label="Back to top">
-            <strong>Metron</strong>
-            <small>Noir Systems</small>
-          </a>
+    <header class="site-header" data-header>
+      <div class="container header-inner">
+        <a class="brand" href="#top" aria-label="Back to top">
+          <strong>Metron</strong>
+          <span>Python systems</span>
+        </a>
 
-          <nav aria-label="Primary">
-            <ul>
-              <li><a href="#manifesto">Manifesto</a></li>
-              <li><a href="#flagship">Flagship</a></li>
-              <li><a href="#capabilities">Capabilities</a></li>
-              <li><a href="#contact">Contact</a></li>
-            </ul>
-          </nav>
-        </div>
+        <nav class="site-nav" aria-label="Primary">
+          <ul>
+            <li><a href="#about" data-nav>About</a></li>
+            <li><a href="#work" data-nav>Work</a></li>
+            <li><a href="#stack" data-nav>Stack</a></li>
+            <li><a href="#contact" data-nav>Contact</a></li>
+          </ul>
+        </nav>
       </div>
     </header>
 
     <main id="top">
-      <section class="hero">
-        <div class="container">
-          <div class="hero-grid">
-            <div class="hero-copy">
-              <div class="hero-reveal" data-hero>
-                <p class="eyebrow">Metron / Independent Python engineer</p>
+      <section class="screen hero" data-hero>
+        <div class="container screen-inner">
+          <p class="screen-label mono reveal" data-reveal>Independent engineer</p>
 
-                <h1 class="hero-title display" aria-label="Calm systems hard logic black tie finish">
-                  <span class="line reveal-text" data-reveal-text="Calm systems.">Calm systems.</span>
-                  <span class="line reveal-text" data-reveal-text="Hard logic.">Hard logic.</span>
-                  <span class="line reveal-text chrome-text" data-reveal-text="Black-tie finish.">Black-tie finish.</span>
-                </h1>
+          <h1 class="screen-title display" aria-label="I build systems that stay calm under pressure">
+            <span class="hero-line" data-hero-line>I build systems</span>
+            <span class="hero-line" data-hero-line>that stay calm</span>
+            <span class="hero-line" data-hero-line>under pressure.</span>
+          </h1>
 
-                <p class="hero-lead">
-                  <strong>Black background. Silver tension. Real backend weight.</strong> I build automation, billing,
-                  Telegram products, and operator tooling that feel expensive because the architecture underneath them is
-                  deliberate.
-                </p>
+          <p class="screen-lead reveal" data-reveal>
+            Python, async services, billing logic, and Telegram products — shaped with restraint on the
+            surface and discipline underneath.
+          </p>
 
-                <p class="hero-note">
-                  Not another developer template. More like a tailored landing page for the way I think: remove noise,
-                  sharpen structure, and make the system feel premium from first glance to last workflow.
-                </p>
-              </div>
+          <div class="hero-actions reveal" data-reveal>
+            <a class="btn btn-primary" href="https://github.com/brabus13372-lab" target="_blank" rel="noreferrer">
+              GitHub
+            </a>
+            <a class="btn" href="https://t.me/filactery" target="_blank" rel="noreferrer">Telegram</a>
+          </div>
+        </div>
+      </section>
 
-              <div class="actions reveal stagger" data-reveal data-stagger>
-                <a class="action primary reveal-item" href="https://github.com/brabus13372-lab" target="_blank" rel="noreferrer">
-                  View GitHub <span aria-hidden="true">↗</span>
+      <section id="about" class="screen">
+        <div class="container screen-inner reveal stagger" data-reveal data-stagger>
+          <p class="screen-label mono reveal-item">About</p>
+          <div class="split">
+            <div>
+              <h2 class="screen-title display reveal-item">Quiet products feel expensive.</h2>
+              <p class="screen-lead reveal-item">
+                I care about systems that are easy to operate after launch: clear flows, stable async logic,
+                and interfaces that do not fight the user.
+              </p>
+            </div>
+
+            <ul class="metric-list reveal-item">
+              <li>
+                <span class="mono">Focus</span>
+                <strong>Automation, billing, and service-side product logic.</strong>
+              </li>
+              <li>
+                <span class="mono">Approach</span>
+                <strong>Less noise in UI. More clarity in architecture.</strong>
+              </li>
+              <li>
+                <span class="mono">Surface</span>
+                <strong>Minimal interfaces with intentional motion.</strong>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="work" class="screen">
+        <div class="container screen-inner reveal stagger" data-reveal data-stagger>
+          <p class="screen-label mono reveal-item">Flagship</p>
+          <div class="split">
+            <div>
+              <h2 class="screen-title display reveal-item">Metron VPN</h2>
+              <p class="screen-lead reveal-item">
+                A Telegram-first product where billing, support, delivery, and infrastructure have to
+                behave like one system — not a pile of scripts.
+              </p>
+
+              <div class="link-row reveal-item">
+                <a class="text-link" href="https://github.com/brabus13372-lab/Metron-vpn" target="_blank" rel="noreferrer">
+                  GitHub <span aria-hidden="true">↗</span>
                 </a>
-                <a class="action reveal-item" href="https://t.me/filactery" target="_blank" rel="noreferrer">
-                  Message on Telegram <span aria-hidden="true">↗</span>
+                <a class="text-link" href="https://t.me/MetronVPN_bot" target="_blank" rel="noreferrer">
+                  Bot <span aria-hidden="true">↗</span>
                 </a>
-              </div>
-
-              <div class="hero-meta reveal stagger" data-reveal data-stagger>
-                <article class="meta-card reveal-item">
-                  <p class="meta-label">Focus</p>
-                  <strong>Automation-heavy products with premium-facing surfaces.</strong>
-                </article>
-                <article class="meta-card reveal-item">
-                  <p class="meta-label">Strength</p>
-                  <strong>Billing, async workflows, Telegram systems, and operator-grade logic.</strong>
-                </article>
-                <article class="meta-card reveal-item">
-                  <p class="meta-label">Taste</p>
-                  <strong>Sharper typography, cleaner hierarchy, and less generic tech noise.</strong>
-                </article>
               </div>
             </div>
 
-            <aside class="hero-stage surface reveal" data-reveal>
-              <div class="stage-head">
-                <span class="stage-badge">Systems dossier</span>
-                <span class="stage-badge">Edition 2026</span>
-              </div>
-
-              <div class="hero-monolith">
-                <div class="monolith-grid" aria-hidden="true"></div>
-                <div class="monolith-glow" aria-hidden="true"></div>
-                <div class="monolith-mark" aria-hidden="true">M</div>
-
-                <div class="monolith-chip chip-a">billing logic</div>
-                <div class="monolith-chip chip-b">service automation</div>
-                <div class="monolith-chip chip-c">operator tooling</div>
-
-                <div class="monolith-copy">
-                  <p class="panel-label">Signature profile</p>
-                  <strong class="display chrome-text">Backend systems with luxury restraint.</strong>
-                  <p>
-                    Premium is not decoration. Premium is when the product surface, the billing flow, the support logic,
-                    and the delivery layer all move like one composed machine.
-                  </p>
-                </div>
-              </div>
-
-              <div class="stage-specs">
-                <article class="spec-card">
-                  <p class="spec-label">Flagship</p>
-                  <strong>Metron VPN</strong>
-                  <p>YooKassa billing, 3x-ui delivery, support FSM, clean service control.</p>
-                </article>
-                <article class="spec-card">
-                  <p class="spec-label">Primary stack</p>
-                  <strong>Python / PostgreSQL / aiohttp</strong>
-                  <p>Async service logic designed to feel structured instead of improvised.</p>
-                </article>
-              </div>
-            </aside>
-          </div>
-        </div>
-      </section>
-
-      <section id="manifesto" class="section">
-        <div class="container">
-          <div class="section-heading reveal" data-reveal>
-            <p class="eyebrow">Manifesto</p>
-            <h2 class="display">Luxury is what remains when the noise is gone.</h2>
-            <p>
-              The expensive feeling in digital work does not come from stacking effects. It comes from control:
-              selective typography, tension in the layout, calm motion, and backend behavior that never breaks the
-              illusion of confidence.
-            </p>
-          </div>
-
-          <div class="manifesto-grid reveal stagger" data-reveal data-stagger>
-            <article class="manifesto-card surface reveal-item">
-              <p class="panel-label">Operating principle</p>
-              <strong class="display">Products should feel tailored, not assembled.</strong>
+            <article class="featured-panel reveal-item">
+              <p class="mono">System layers</p>
+              <h3>Built to run, not just to demo.</h3>
               <p>
-                I like black surfaces, silver text, precise spacing, and interfaces that hold tension without becoming
-                loud. But the real goal is deeper: systems that are easier to run, easier to trust, and visibly more
-                disciplined than the average tech landing.
+                Daily billing, YooKassa payments, FSM support, 3x-ui delivery, and operational hygiene —
+                composed into one service.
               </p>
-            </article>
-
-            <article class="quote-card surface reveal-item">
-              <p class="panel-label">Positioning</p>
-              <strong class="display chrome-text">Backend discipline with visible taste.</strong>
-              <p>
-                My work sits at the point where product logic, money flow, service delivery, and presentation all need
-                to feel like the same brand.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="flagship" class="section">
-        <div class="container">
-          <div class="section-heading reveal" data-reveal>
-            <p class="eyebrow">Flagship System</p>
-            <h2 class="display">Metron VPN</h2>
-            <p>
-              A Telegram-first product where onboarding, billing, support, and infrastructure have to behave like one
-              premium service instead of four separate moving parts.
-            </p>
-          </div>
-
-          <article class="flagship-card surface reveal" data-reveal>
-            <div class="flagship-grid">
-              <div class="flagship-copy">
-                <p class="panel-label">Why it stands out</p>
-                <h3 class="display">One product. Four layers. No generic energy.</h3>
-                <p>
-                  Metron VPN ties together bot UX, payment handling, subscription logic, support routing, and 3x-ui
-                  delivery into one controlled system. The point is not just that it works. The point is that it works
-                  with the composure of a real product.
-                </p>
-
-                <div class="stats-grid">
-                  <article class="stat-card">
-                    <p class="spec-label">Billing</p>
-                    <strong>Daily renewals, balance states, and payment lifecycle management.</strong>
-                  </article>
-                  <article class="stat-card">
-                    <p class="spec-label">Delivery</p>
-                    <strong>Automated VLESS and REALITY access wired into infrastructure actions.</strong>
-                  </article>
-                  <article class="stat-card">
-                    <p class="spec-label">Support</p>
-                    <strong>FSM-driven tickets and operator routes treated as product surfaces.</strong>
-                  </article>
-                  <article class="stat-card">
-                    <p class="spec-label">Safety</p>
-                    <strong>Log sanitation and calmer day-to-day service maintenance.</strong>
-                  </article>
-                </div>
-
-                <div class="links-row">
-                  <a class="action primary" href="https://github.com/brabus13372-lab/Metron-vpn" target="_blank" rel="noreferrer">
-                    View GitHub <span aria-hidden="true">↗</span>
-                  </a>
-                  <a class="action" href="https://t.me/metronVPN" target="_blank" rel="noreferrer">
-                    Channel <span aria-hidden="true">↗</span>
-                  </a>
-                  <a class="action" href="https://t.me/MetronVPN_bot" target="_blank" rel="noreferrer">
-                    Bot <span aria-hidden="true">↗</span>
-                  </a>
-                </div>
-              </div>
-
-              <aside class="stack-column">
-                <article class="stack-card">
-                  <p class="spec-label">Client entry</p>
-                  <strong>Telegram flows for onboarding, subscription, balance, and support.</strong>
-                  <p>The layer users feel first, shaped to stay low-friction and calm.</p>
-                </article>
-
-                <article class="stack-card">
-                  <p class="spec-label">Service core</p>
-                  <strong>Async Python workflows for state, scheduling, and product rules.</strong>
-                  <p>The logic that keeps the service readable once real usage begins to stack.</p>
-                </article>
-
-                <article class="stack-card">
-                  <p class="spec-label">Commercial logic</p>
-                  <strong>YooKassa integrations and billing behavior wired into user experience.</strong>
-                  <p>Money flow and product flow move as one system, because they should.</p>
-                </article>
-
-                <article class="stack-card">
-                  <p class="spec-label">Infrastructure bridge</p>
-                  <strong>3x-ui orchestration, access delivery, and controlled service operations.</strong>
-                  <p>Operational depth without operational mess leaking into the product.</p>
-                </article>
-              </aside>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container">
-          <div class="section-heading reveal" data-reveal>
-            <p class="eyebrow">Selected Surfaces</p>
-            <h2 class="display">Other proof that taste survives outside the backend.</h2>
-            <p>
-              Systems may be the main differentiator, but the surface still matters. Strong products should not start
-              looking generic the moment they meet the user.
-            </p>
-          </div>
-
-          <div class="feature-grid reveal stagger" data-reveal data-stagger>
-            <article class="feature-card surface reveal-item">
-              <span>Web work</span>
-              <h3>nvfstudio</h3>
-              <p>
-                A client landing page shaped around atmosphere, pacing, and editorial restraint. Cleaner than a standard
-                marketing layout because it was built to feel composed, not loud.
-              </p>
-              <ul class="detail-list">
+              <ul class="featured-points">
                 <li>
-                  <strong>Role</strong>
-                  <span>Front-end implementation with attention to visual rhythm and conversion clarity.</span>
+                  <strong>Billing</strong>
+                  Renewals, balances, and payment lifecycle handling.
                 </li>
                 <li>
-                  <strong>Result</strong>
-                  <span>A web surface that feels curated rather than pieced together.</span>
-                </li>
-              </ul>
-              <a class="action" href="https://nvfstudio.ru" target="_blank" rel="noreferrer">
-                Visit site <span aria-hidden="true">↗</span>
-              </a>
-            </article>
-
-            <article class="feature-card surface reveal-item">
-              <span>Working style</span>
-              <h3>Operator-first product thinking.</h3>
-              <p>
-                I treat support routes, admin tooling, and background service logic as first-class design problems. That
-                is often the difference between a product that looks expensive and one that only has a pretty shell.
-              </p>
-              <ul class="detail-list">
-                <li>
-                  <strong>Architecture</strong>
-                  <span>Less glue code, clearer responsibilities, calmer long-term maintenance.</span>
+                  <strong>Delivery</strong>
+                  Automated access wired to real infrastructure actions.
                 </li>
                 <li>
-                  <strong>Presentation</strong>
-                  <span>Interfaces should carry authority without turning noisy or gimmicky.</span>
+                  <strong>Support</strong>
+                  Operator flows treated as part of the product.
                 </li>
               </ul>
             </article>
@@ -1357,186 +139,81 @@
         </div>
       </section>
 
-      <section id="capabilities" class="section">
-        <div class="container">
-          <div class="section-heading reveal" data-reveal>
-            <p class="eyebrow">Capabilities</p>
-            <h2 class="display">Where I create the most leverage.</h2>
-            <p>
-              My strongest work happens where commercial logic, automation, and product experience collide. That is
-              where clean engineering stops being theoretical and starts feeling premium.
-            </p>
+      <section class="screen">
+        <div class="container screen-inner reveal" data-reveal>
+          <p class="screen-label mono">Selected</p>
+          <h2 class="screen-title display">nvfstudio</h2>
+          <p class="screen-lead">
+            A client landing page with editorial pacing, visual rhythm, and conversion clarity — built
+            to feel calm instead of loud.
+          </p>
+          <div class="link-row">
+            <a class="text-link" href="https://nvfstudio.ru" target="_blank" rel="noreferrer">
+              Visit site <span aria-hidden="true">↗</span>
+            </a>
           </div>
+        </div>
+      </section>
 
-          <div class="cap-grid reveal stagger" data-reveal data-stagger>
-            <article class="cap-card surface reveal-item">
-              <span>Automation</span>
-              <h3>Async service logic</h3>
-              <p>Schedulers, integrations, and workflow engines designed for actual product pressure.</p>
+      <section id="stack" class="screen">
+        <div class="container screen-inner reveal stagger" data-reveal data-stagger>
+          <p class="screen-label mono reveal-item">Capabilities</p>
+          <h2 class="screen-title display reveal-item">What I build best.</h2>
+          <div class="capability-grid reveal-item">
+            <article class="capability-item">
+              <p class="mono">Automation</p>
+              <h3>Async services</h3>
+              <p>Schedulers, integrations, and workflow engines for real product pressure.</p>
             </article>
-
-            <article class="cap-card surface reveal-item">
-              <span>Commercial logic</span>
-              <h3>Billing systems</h3>
-              <p>Renewals, balances, state transitions, and money flow treated as product architecture.</p>
+            <article class="capability-item">
+              <p class="mono">Commercial</p>
+              <h3>Billing logic</h3>
+              <p>Renewals, balances, and monetization rules wired into the experience.</p>
             </article>
-
-            <article class="cap-card surface reveal-item">
-              <span>Telegram products</span>
-              <h3>Bot-first UX</h3>
-              <p>Onboarding, support, admin routes, and delivery steps designed like one coherent service.</p>
+            <article class="capability-item">
+              <p class="mono">Telegram</p>
+              <h3>Bot products</h3>
+              <p>Onboarding, support, and delivery designed as one coherent service.</p>
             </article>
-
-            <article class="cap-card surface reveal-item">
-              <span>Front-end restraint</span>
-              <h3>Noir premium surfaces</h3>
-              <p>Black-and-silver identity, strong type, and motion that adds authority instead of noise.</p>
+            <article class="capability-item">
+              <p class="mono">Interface</p>
+              <h3>Minimal surfaces</h3>
+              <p>Black-and-silver layouts with motion that feels expensive, not noisy.</p>
             </article>
           </div>
         </div>
       </section>
 
-      <section id="contact" class="section">
-        <div class="container">
-          <article class="contact-shell surface reveal" data-reveal>
-            <div class="contact-copy">
-              <p class="eyebrow">Contact</p>
-              <h2 class="display">Let's build something that looks calm and runs hard.</h2>
-              <p>
-                If you want a backend-heavy product, a Telegram service, or an automation layer that should feel premium
-                from first impression to final operator action, write to me.
-              </p>
+      <section id="contact" class="screen contact-screen">
+        <div class="container screen-inner reveal" data-reveal>
+          <p class="screen-label mono">Contact</p>
+          <h2 class="screen-title display">Let’s build something calm and sharp.</h2>
+          <p class="screen-lead">
+            Open to backend-heavy products, Telegram services, and systems that should feel deliberate from
+            the first screen to the last workflow.
+          </p>
 
-              <div class="actions" style="margin-top: 24px;">
-                <a class="action primary" href="https://t.me/filactery" target="_blank" rel="noreferrer">
-                  Message on Telegram <span aria-hidden="true">↗</span>
-                </a>
-                <a class="action" href="https://github.com/brabus13372-lab" target="_blank" rel="noreferrer">
-                  Browse GitHub <span aria-hidden="true">↗</span>
-                </a>
-              </div>
-            </div>
-
-            <div class="contact-grid">
-              <article class="contact-card surface">
-                <span>Telegram</span>
-                <a href="https://t.me/filactery" target="_blank" rel="noreferrer">@filactery</a>
-                <p>Best for direct contact, product discussions, and collaboration that needs fast signal.</p>
-              </article>
-
-              <article class="contact-card surface">
-                <span>GitHub</span>
-                <a href="https://github.com/brabus13372-lab" target="_blank" rel="noreferrer">brabus13372-lab</a>
-                <p>Public code, experiments, and the clearest trace of how I structure systems.</p>
-              </article>
-            </div>
-          </article>
+          <div class="contact-links">
+            <a href="https://t.me/filactery" target="_blank" rel="noreferrer">
+              @filactery
+              <span>Telegram</span>
+            </a>
+            <a href="https://github.com/brabus13372-lab" target="_blank" rel="noreferrer">
+              brabus13372-lab
+              <span>GitHub</span>
+            </a>
+          </div>
         </div>
       </section>
     </main>
 
     <footer class="footer">
-      <div class="container">
-        <div class="footer-inner">
-          <span>© <span id="year"></span> Metron</span>
-          <a href="#top">Back to top</a>
-        </div>
+      <div class="container footer-inner">
+        <span>© <span id="year"></span> Metron</span>
+        <a href="#top">Back to top</a>
       </div>
     </footer>
 
-    <script>
-      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-
-      const setYear = () => {
-        const el = document.getElementById("year")
-        if (el) el.textContent = String(new Date().getFullYear())
-      }
-
-      const setStaggerIndexes = () => {
-        document.querySelectorAll("[data-stagger]").forEach((group) => {
-          Array.from(group.querySelectorAll(".reveal-item"))
-            .forEach((el, idx) => el.style.setProperty("--i", String(idx)))
-        })
-      }
-
-      const setupRevealText = () => {
-        document.querySelectorAll("[data-reveal-text]").forEach((el) => {
-          const text = el.getAttribute("data-reveal-text") || el.textContent || ""
-          const words = text.split(/\s+/).filter(Boolean)
-
-          el.textContent = ""
-          el.classList.add("reveal-text")
-
-          let delay = 0
-          words.forEach((word, idx) => {
-            const token = document.createElement("span")
-            token.className = "token"
-            token.textContent = word
-            token.style.setProperty("--d", `${delay}ms`)
-            el.appendChild(token)
-            if (idx < words.length - 1) el.appendChild(document.createTextNode(" "))
-            delay += 110
-          })
-        })
-      }
-
-      const setupObservers = () => {
-        const targets = document.querySelectorAll("[data-reveal]")
-
-        if (prefersReducedMotion) {
-          targets.forEach((el) => el.classList.add("is-visible"))
-          return
-        }
-
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (!entry.isIntersecting) return
-              entry.target.classList.add("is-visible")
-              observer.unobserve(entry.target)
-            })
-          },
-          { threshold: 0.14, rootMargin: "0px 0px -8% 0px" }
-        )
-
-        targets.forEach((el) => observer.observe(el))
-      }
-
-      const runHero = () => {
-        const hero = document.querySelector("[data-hero]")
-        if (!hero) return
-
-        const lines = hero.querySelectorAll("[data-reveal-text]")
-
-        if (prefersReducedMotion) {
-          hero.classList.add("is-on")
-          lines.forEach((line) => line.classList.add("is-on"))
-          return
-        }
-
-        requestAnimationFrame(() => {
-          hero.classList.add("is-on")
-          lines.forEach((line) => line.classList.add("is-on"))
-        })
-      }
-
-      const setupSpotlight = () => {
-        if (prefersReducedMotion) return
-
-        const update = (x, y) => {
-          document.documentElement.style.setProperty("--mx", `${x}px`)
-          document.documentElement.style.setProperty("--my", `${y}px`)
-        }
-
-        window.addEventListener("mousemove", (event) => update(event.clientX, event.clientY))
-      }
-
-      setupRevealText()
-      setStaggerIndexes()
-      setupObservers()
-      runHero()
-      setupSpotlight()
-      setYear()
-    </script>
+    <script src="assets/js/main.js" defer></script>
   </body>
 </html>

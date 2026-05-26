@@ -1,6 +1,6 @@
 # Metron — Portfolio
 
-Personal portfolio site. Python & Web Developer.
+Minimal personal portfolio. Python systems, billing, Telegram products.
 
 ![HTML](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
 ![CSS](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
@@ -11,28 +11,30 @@ Personal portfolio site. Python & Web Developer.
 
 ---
 
-## Features
+## Structure
 
-- Cursor glow effect
-- Noise overlay texture
-- 3D tilt on cards and nav pill
-- Scroll reveal animations with stagger
-- Fully responsive
-- No dependencies — pure HTML/CSS/JS
+```
+index.html
+assets/css/main.css
+assets/js/main.js
+```
 
 ---
 
-## Use as a template
+## Features
 
-1. Fork this repo
-2. Edit `index.html` — find these sections and replace with your info:
-   - `Metron` → your name
-   - `#about` → your bio
-   - `#projects` → your projects
-   - `#stack` → your stack tags
-   - `#contact` → your links
-3. Enable GitHub Pages: **Settings → Pages → Branch: main → Save**
-4. Your site will be live at `https://<your-username>.github.io/<repo-name>`
+- Full-viewport screen sections with gentle scroll snap
+- Scroll progress line and active nav state
+- Hero word reveal and staggered section entrances
+- `prefers-reduced-motion` respected
+- Fully responsive
+- No dependencies — static HTML/CSS/JS
+
+---
+
+## Deploy
+
+GitHub Pages deploys via `.github/workflows/pages.yml` on push to `main`.
 
 ---
 
