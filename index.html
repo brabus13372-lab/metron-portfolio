@@ -3,8 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Metron — Python & Web Developer. Minimal portfolio." />
-    <title>Metron — Portfolio</title>
+    <meta
+      name="description"
+      content="Metron - independent Python engineer focused on automation, billing, bots, and backend systems."
+    />
+    <title>Metron - Systems Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -13,25 +16,29 @@
     />
     <style>
       :root {
-        --bg-0: #0a0a0a;
-        --bg-1: #0d0d0d;
-        --text-0: #ffffff;
-        --text-1: #e8e8e8;
-        --text-2: #c0c0c0;
-        --text-warm: #c8cdd2;
-        --accent: #b0b8c1;
-        --border: rgba(176, 184, 193, 0.25);
-        --border-strong: rgba(176, 184, 193, 0.38);
-        --shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
-        --shadow-soft: 0 14px 46px rgba(0, 0, 0, 0.48);
-        --radius: 20px;
-        --radius-sm: 18px;
-        --container: 1120px;
+        --bg-0: #06080c;
+        --bg-1: #0b0f14;
+        --bg-2: #10161d;
+        --surface-0: rgba(10, 15, 21, 0.72);
+        --surface-1: rgba(12, 18, 24, 0.9);
+        --surface-2: rgba(17, 24, 32, 0.9);
+        --text-0: #f7fafc;
+        --text-1: #d9e0e8;
+        --text-2: #a2afbd;
+        --text-soft: #8d99a7;
+        --accent: #bcc7d2;
+        --line: rgba(188, 199, 210, 0.14);
+        --line-strong: rgba(188, 199, 210, 0.28);
+        --shadow: 0 28px 80px rgba(0, 0, 0, 0.5);
+        --shadow-soft: 0 20px 60px rgba(0, 0, 0, 0.38);
+        --radius: 28px;
+        --radius-sm: 22px;
+        --container: 1160px;
         --pad-x: clamp(18px, 4vw, 42px);
-        --pad-y: clamp(52px, 7vw, 96px);
+        --pad-y: clamp(56px, 8vw, 110px);
         --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
         --dur: 700ms;
-        --stagger-step: 80ms;
+        --stagger-step: 90ms;
       }
 
       * { box-sizing: border-box; }
@@ -40,72 +47,74 @@
 
       body {
         margin: 0;
+        min-height: 100vh;
+        position: relative;
         font-family: "Plus Jakarta Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
         font-weight: 300;
         color: var(--text-1);
-        background: linear-gradient(180deg, var(--bg-0), var(--bg-1));
-        min-height: 100vh;
-        position: relative;
+        background:
+          radial-gradient(1200px 900px at 72% 18%, rgba(187, 198, 210, 0.09), transparent 58%),
+          radial-gradient(1000px 760px at 12% 82%, rgba(98, 118, 140, 0.12), transparent 60%),
+          linear-gradient(180deg, var(--bg-0), var(--bg-1) 40%, var(--bg-2));
       }
 
-      body::before {
+      body::before,
+      body::after {
         content: "";
         position: fixed;
         inset: 0;
         pointer-events: none;
-        background:
-          linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0) 22%),
-          radial-gradient(1400px 900px at 70% 20%, rgba(176,184,193,0.06), rgba(176,184,193,0) 60%),
-          radial-gradient(1200px 900px at 15% 85%, rgba(255,255,255,0.035), rgba(255,255,255,0) 55%);
-        opacity: 0.85;
       }
 
-      header, main, footer { position: relative; z-index: 2; }
-
-      .cursor-glow {
-        position: fixed;
-        pointer-events: none;
+      body::before {
         z-index: 0;
-        width: 600px;
-        height: 600px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(176,184,193,0.06) 0%, transparent 70%);
-        transform: translate(-50%, -50%);
-        transition: left 0.15s ease, top 0.15s ease;
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0) 20%),
+          radial-gradient(900px 600px at 50% 0%, rgba(255,255,255,0.04), transparent 75%);
+        opacity: 0.9;
       }
 
-      .noise-overlay {
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        pointer-events: none;
+      body::after {
         z-index: 1;
-        opacity: 0.025;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/feTurbulence%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-        background-size: 200px 200px;
+        opacity: 0.18;
+        background:
+          linear-gradient(rgba(188, 199, 210, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(188, 199, 210, 0.05) 1px, transparent 1px);
+        background-size: 120px 120px;
+        mask-image: radial-gradient(circle at 50% 28%, black 24%, transparent 72%);
       }
 
-      a { color: inherit; text-decoration: none; }
+      header,
+      main,
+      footer {
+        position: relative;
+        z-index: 2;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
       a:hover { color: var(--text-0); }
+
       a:focus-visible {
-        outline: 2px solid rgba(176,184,193,0.65);
+        outline: 2px solid rgba(188, 199, 210, 0.65);
         outline-offset: 3px;
         border-radius: 10px;
       }
 
-      ::selection { background: rgba(176,184,193,0.24); }
+      ::selection { background: rgba(188, 199, 210, 0.24); }
 
       .container {
         width: min(var(--container), calc(100% - var(--pad-x) * 2));
         margin: 0 auto;
       }
 
-      /* ── Header / Nav ── */
       header {
         position: sticky;
         top: 0;
         z-index: 50;
-        background: transparent;
         padding: 14px 0;
       }
 
@@ -114,33 +123,39 @@
         align-items: center;
         justify-content: space-between;
         gap: 18px;
-        padding: 12px 18px;
-        border-radius: 999px;
-        background: rgba(10,10,10,0.58);
-        border: 1px solid rgba(176,184,193,0.2);
-        backdrop-filter: blur(12px);
-        box-shadow: 0 14px 46px rgba(0,0,0,0.55);
-        transform-style: preserve-3d;
-        will-change: transform;
+        padding: 14px 18px;
+        border-radius: 20px;
+        border: 1px solid var(--line);
+        background: rgba(7, 11, 16, 0.72);
+        backdrop-filter: blur(18px);
+        box-shadow: 0 18px 60px rgba(0, 0, 0, 0.34);
       }
 
       .brand {
         display: inline-flex;
-        align-items: baseline;
-        gap: 10px;
-        letter-spacing: 0.02em;
-        font-weight: 400;
+        flex-direction: column;
+        gap: 3px;
+        min-width: max-content;
+      }
+
+      .brand strong {
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
         color: var(--text-0);
       }
 
       .brand small {
-        color: var(--text-warm);
-        font-weight: 300;
-        letter-spacing: 0.02em;
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--text-soft);
       }
 
       nav ul {
-        margin: 0; padding: 0;
+        margin: 0;
+        padding: 0;
         list-style: none;
         display: flex;
         gap: 18px;
@@ -150,290 +165,461 @@
       }
 
       nav a {
-        font-size: 13px;
+        font-size: 12px;
         letter-spacing: 0.14em;
         text-transform: uppercase;
-        color: var(--text-warm);
+        color: var(--text-soft);
         transition: color 220ms var(--ease-out);
       }
 
-      nav a:hover { color: var(--text-0); }
-
-      /* ── Main ── */
       main { padding: clamp(34px, 5.2vw, 76px) 0; }
 
-      section { scroll-margin-top: 84px; }
+      section { scroll-margin-top: 96px; }
 
       .section { padding: var(--pad-y) 0; }
 
       .section + .section {
-        border-top: 1px solid rgba(176,184,193,0.12);
+        border-top: 1px solid rgba(188, 199, 210, 0.08);
       }
 
-      .kicker {
-        font-size: 12px;
+      .kicker,
+      .panel-label,
+      .surface-label,
+      .stat span,
+      .contact-card span {
+        font-size: 11px;
         letter-spacing: 0.18em;
         text-transform: uppercase;
         color: var(--accent);
-        margin: 0 0 14px 0;
       }
 
-      /* ── Hero ── */
+      .section-heading {
+        display: grid;
+        gap: 12px;
+        max-width: 74ch;
+      }
+
+      .section-heading h2 {
+        margin: 0;
+        font-size: clamp(30px, 4.2vw, 50px);
+        letter-spacing: -0.03em;
+        line-height: 1;
+        color: var(--text-0);
+        font-weight: 600;
+      }
+
+      .section-heading p {
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.8;
+        color: rgba(217, 224, 232, 0.78);
+      }
+
       .hero {
-        min-height: auto;
-        padding-top: 120px;
-        padding-bottom: 80px;
+        padding-top: 132px;
+        padding-bottom: 94px;
       }
 
       .hero-inner {
         display: grid;
-        grid-template-columns: 1.2fr 0.8fr;
-        gap: clamp(28px, 5vw, 64px);
-        align-items: center;
+        grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+        gap: clamp(28px, 6vw, 78px);
+        align-items: start;
+      }
+
+      .hero-copy {
+        display: grid;
+        gap: 30px;
+      }
+
+      .hero-kicker {
+        margin: 0 0 18px 0;
+        color: var(--accent);
+        font-size: 12px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
       }
 
       h1 {
-        font-size: clamp(54px, 7.2vw, 104px);
-        letter-spacing: -0.03em;
-        line-height: 0.95;
         margin: 0;
+        font-size: clamp(52px, 8vw, 102px);
+        letter-spacing: -0.05em;
+        line-height: 0.92;
         font-weight: 600;
         color: var(--text-0);
+        max-width: 8ch;
       }
 
       .hero-subtitle {
-        margin: 18px 0 0 0;
-        font-size: clamp(16px, 2vw, 20px);
-        line-height: 1.55;
-        color: var(--text-warm);
-        max-width: 52ch;
+        margin: 24px 0 0 0;
+        max-width: 58ch;
+        font-size: clamp(18px, 2vw, 21px);
+        line-height: 1.65;
+        color: rgba(217, 224, 232, 0.84);
       }
 
-      .hero-subtitle strong { font-weight: 400; color: var(--text-1); }
+      .hero-subtitle strong {
+        color: var(--text-0);
+        font-weight: 500;
+      }
 
       .hero-line {
         margin: 18px 0 0 0;
-        color: rgba(176,184,193,0.86);
+        max-width: 60ch;
         font-size: 15px;
-        letter-spacing: 0.01em;
+        line-height: 1.8;
+        color: var(--text-soft);
+      }
+
+      .hero-proof {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+      }
+
+      .hero-proof li {
+        display: grid;
+        grid-template-columns: minmax(120px, 150px) 1fr;
+        gap: 16px;
+        padding: 14px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .hero-proof strong {
+        font-weight: 400;
         line-height: 1.7;
-        max-width: 56ch;
+        color: rgba(217, 224, 232, 0.92);
       }
 
       .hero-aside {
-        border: 1px solid rgba(176,184,193,0.18);
+        position: relative;
+        overflow: hidden;
+        padding: 26px;
+        border: 1px solid var(--line);
         border-radius: var(--radius);
-        padding: 22px 22px 20px 22px;
-        background: rgba(13,13,13,0.78);
+        background:
+          linear-gradient(180deg, rgba(19, 26, 34, 0.96), rgba(10, 15, 21, 0.92)),
+          var(--surface-1);
         box-shadow: var(--shadow-soft);
       }
 
-      .meta-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+      .hero-aside::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(188, 199, 210, 0.08), transparent 45%);
+        pointer-events: none;
+      }
+
+      .hero-aside > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-aside-copy {
+        margin: 12px 0 0 0;
+        font-size: 14px;
+        line-height: 1.75;
+        color: rgba(217, 224, 232, 0.75);
+      }
+
+      .system-diagram {
+        margin-top: 22px;
+        padding: 18px;
+        display: grid;
+        gap: 12px;
+        border-radius: 24px;
+        border: 1px solid rgba(188, 199, 210, 0.12);
+        background: rgba(6, 9, 13, 0.64);
+      }
+
+      .diagram-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 20px minmax(0, 1fr);
+        gap: 12px;
+        align-items: center;
+      }
+
+      .diagram-node {
+        padding: 14px 15px;
+        border-radius: 18px;
+        border: 1px solid rgba(188, 199, 210, 0.12);
+        background: rgba(14, 20, 27, 0.9);
+      }
+
+      .diagram-node strong {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 13px;
+        letter-spacing: 0.03em;
+        color: var(--text-0);
+        font-weight: 500;
+      }
+
+      .diagram-node small {
+        display: block;
+        font-size: 12px;
+        line-height: 1.6;
+        color: var(--text-soft);
+      }
+
+      .diagram-link {
+        position: relative;
+        height: 1px;
+        background: linear-gradient(90deg, rgba(188, 199, 210, 0.15), rgba(188, 199, 210, 0.55));
+      }
+
+      .diagram-link::after {
+        content: "";
+        position: absolute;
+        right: -1px;
+        top: -3px;
+        width: 6px;
+        height: 6px;
+        border-top: 1px solid rgba(188, 199, 210, 0.65);
+        border-right: 1px solid rgba(188, 199, 210, 0.65);
+        transform: rotate(45deg);
+      }
+
+      .meta-grid {
+        display: grid;
+        margin-top: 20px;
+      }
 
       .meta-row {
         display: flex;
         justify-content: space-between;
-        gap: 16px;
-        align-items: baseline;
-        padding: 10px 0;
-        border-bottom: 1px solid rgba(176,184,193,0.1);
+        gap: 20px;
+        align-items: flex-start;
+        padding: 14px 0;
+        border-top: 1px solid var(--line);
       }
-
-      .meta-row:last-child { border-bottom: 0; }
 
       .meta-row span {
-        font-size: 12px;
-        letter-spacing: 0.14em;
+        font-size: 11px;
+        letter-spacing: 0.16em;
         text-transform: uppercase;
-        color: rgba(200,205,210,0.72);
+        color: var(--text-soft);
       }
 
-      .meta-row a,
-      .meta-row strong {
-        font-weight: 400;
-        letter-spacing: 0.01em;
-        color: rgba(232,232,232,0.9);
-      }
-
+      .meta-row strong,
       .meta-row a {
-        color: rgba(176,184,193,0.92);
-        transition: color 220ms var(--ease-out);
+        max-width: 28ch;
+        text-align: right;
+        font-weight: 400;
+        line-height: 1.6;
+        color: rgba(217, 224, 232, 0.92);
       }
 
-      .meta-row a:hover { color: var(--text-0); }
+      .meta-row a { color: var(--accent); }
 
-      /* ── About ── */
-      .content { max-width: 72ch; }
+      #about.section { padding-top: clamp(34px, 5vw, 66px); }
+
+      .content {
+        max-width: 76ch;
+        margin-top: 18px;
+      }
 
       .content p {
         margin: 0;
         font-size: 16px;
-        line-height: 1.85;
-        color: rgba(232,232,232,0.82);
+        line-height: 1.9;
+        color: rgba(217, 224, 232, 0.8);
       }
 
-      #about.section { padding-top: clamp(34px, 5vw, 66px); }
+      .featured-card,
+      .surface,
+      .contact-card {
+        border: 1px solid var(--line);
+        background: var(--surface-0);
+        box-shadow: var(--shadow-soft);
+      }
 
-      /* ── Projects grid ── */
-      .projects-grid {
+      .featured-card {
+        margin-top: 28px;
+        padding: clamp(24px, 4vw, 38px);
+        border-radius: 30px;
+      }
+
+      .featured-grid {
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 18px;
-        margin-top: 22px;
+        grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+        gap: 26px;
+        align-items: start;
       }
 
-      .card {
-        position: relative;
-        border-radius: var(--radius);
-        border: 1px solid var(--border);
-        background: rgba(13,13,13,0.78);
-        padding: 22px 22px 20px 22px;
-        box-shadow: 0 0 0 rgba(0,0,0,0);
-        transform: translateY(0) scale(1);
-        transform-style: preserve-3d;
-        will-change: transform;
-        transition:
-          transform 260ms var(--ease-out),
-          box-shadow 260ms var(--ease-out),
-          border-color 260ms var(--ease-out);
-      }
-
-      .card:hover {
-        transform: translateY(-1px) scale(1.02);
-        border-color: var(--border-strong);
-        box-shadow: 0 20px 72px rgba(0,0,0,0.58);
-      }
-
-      .card h3 {
-        margin: 2px 0 12px 0;
-        font-size: 18px;
-        font-weight: 600;
+      .featured-copy h3,
+      .surface h3,
+      .contact-card h3 {
+        margin: 12px 0 12px 0;
+        font-size: 24px;
+        line-height: 1.15;
+        letter-spacing: -0.02em;
         color: var(--text-0);
-        letter-spacing: -0.01em;
+        font-weight: 600;
       }
 
-      .card p {
-        margin: 0 0 14px 0;
-        color: rgba(232,232,232,0.78);
-        line-height: 1.75;
-        font-size: 14.5px;
+      .featured-copy p,
+      .surface p,
+      .contact-card p {
+        margin: 0;
+        font-size: 15px;
+        line-height: 1.8;
+        color: rgba(217, 224, 232, 0.8);
       }
 
-      .card .stackline {
-        margin: 0 0 14px 0;
-        color: rgba(176,184,193,0.92);
-        font-size: 12.5px;
-        letter-spacing: 0.01em;
+      .stats-grid,
+      .selected-grid,
+      .capabilities-grid,
+      .contact-grid {
+        display: grid;
+        gap: 18px;
       }
 
-      /* ── Pill / Link / Tags ── */
-      .pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 12px;
-        border-radius: 999px;
-        border: 1px solid rgba(176,184,193,0.26);
-        color: rgba(176,184,193,0.98);
-        font-size: 12px;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
+      .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-top: 24px;
+      }
+
+      .stat {
+        padding: 18px;
+        border-radius: 20px;
+        border: 1px solid rgba(188, 199, 210, 0.12);
+        background: rgba(8, 12, 17, 0.5);
+      }
+
+      .stat strong {
+        display: block;
+        margin-top: 8px;
+        font-size: 14px;
+        line-height: 1.7;
+        color: rgba(247, 250, 252, 0.92);
+        font-weight: 400;
+      }
+
+      .featured-panel,
+      .surface,
+      .contact-card {
+        padding: 22px;
+        border-radius: 24px;
+      }
+
+      .featured-panel {
+        border: 1px solid rgba(188, 199, 210, 0.12);
+        background: rgba(8, 12, 17, 0.58);
+      }
+
+      .detail-list {
+        margin: 18px 0 0 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 12px;
+      }
+
+      .detail-list li {
+        padding-top: 12px;
+        border-top: 1px solid rgba(188, 199, 210, 0.1);
+      }
+
+      .detail-list strong {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 13px;
+        letter-spacing: 0.03em;
+        color: var(--text-0);
+        font-weight: 500;
+      }
+
+      .detail-list span {
+        font-size: 14px;
+        line-height: 1.7;
+        color: rgba(217, 224, 232, 0.74);
+      }
+
+      .selected-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-top: 18px;
+      }
+
+      .capabilities-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-top: 26px;
+      }
+
+      .surface {
+        transition:
+          transform 240ms var(--ease-out),
+          border-color 240ms var(--ease-out),
+          background-color 240ms var(--ease-out);
+      }
+
+      .surface:hover {
+        transform: translateY(-2px);
+        border-color: var(--line-strong);
+        background: rgba(14, 20, 27, 0.86);
       }
 
       .links-row {
         display: flex;
-        gap: 14px;
+        gap: 12px;
         flex-wrap: wrap;
         align-items: center;
-        margin-top: 14px;
+        margin-top: 22px;
       }
 
       .link {
         display: inline-flex;
-        gap: 10px;
         align-items: center;
-        padding: 10px 12px;
+        gap: 10px;
+        padding: 11px 14px;
         border-radius: 999px;
-        border: 1px solid rgba(176,184,193,0.26);
-        background: rgba(10,10,10,0.28);
-        color: rgba(176,184,193,0.98);
+        border: 1px solid rgba(188, 199, 210, 0.2);
+        background: rgba(12, 18, 24, 0.72);
+        color: rgba(217, 224, 232, 0.88);
+        font-size: 13px;
         transition:
           transform 220ms var(--ease-out),
-          background-color 220ms var(--ease-out),
           border-color 220ms var(--ease-out),
+          background-color 220ms var(--ease-out),
           color 220ms var(--ease-out);
-        font-size: 13px;
+      }
+
+      .primary-link {
+        border-color: rgba(188, 199, 210, 0.34);
+        background: linear-gradient(180deg, rgba(182, 194, 206, 0.14), rgba(182, 194, 206, 0.05));
+        color: var(--text-0);
       }
 
       .link:hover {
         transform: translateY(-1px);
-        background: rgba(176,184,193,0.15);
-        border-color: rgba(176,184,193,0.42);
+        border-color: rgba(188, 199, 210, 0.38);
+        background: rgba(19, 27, 35, 0.9);
         color: var(--text-0);
       }
 
       .link .arrow { opacity: 0.7; }
 
-      /* ── Stack ── */
-      .tags-list {
-        list-style: none;
-        margin: 18px 0 0 0;
-        padding: 0;
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-      }
-
-      .tag {
-        display: inline-flex;
-        align-items: center;
-        padding: 10px 12px;
-        border-radius: 999px;
-        border: 1px solid rgba(176,184,193,0.25);
-        background: rgba(13,13,13,0.62);
-        color: rgba(176,184,193,0.96);
-        font-size: 13px;
-        letter-spacing: 0.02em;
-      }
-
-      /* ── Contact ── */
       .contact-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 12px;
-        margin-top: 16px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-top: 26px;
       }
 
-      .contact-row {
-        display: flex;
-        gap: 12px;
-        align-items: baseline;
-        justify-content: space-between;
-        padding: 14px 16px;
-        border-radius: var(--radius-sm);
-        border: 1px solid rgba(176,184,193,0.14);
-        background: rgba(13,13,13,0.55);
+      .contact-card a {
+        display: inline-block;
+        margin: 12px 0 10px 0;
+        font-size: 22px;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        color: var(--text-0);
+        font-weight: 500;
       }
 
-      .contact-row span {
-        font-size: 12px;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        color: rgba(176,184,193,0.9);
-      }
-
-      .contact-row a {
-        color: rgba(176,184,193,0.95);
-        transition: color 220ms var(--ease-out);
-      }
-
-      .contact-row a:hover { color: var(--text-0); }
-
-      /* ── Footer ── */
       footer {
         padding: 34px 0 54px 0;
-        border-top: 1px solid rgba(176,184,193,0.12);
-        color: rgba(200,205,210,0.72);
+        border-top: 1px solid rgba(188, 199, 210, 0.08);
+        color: rgba(162, 175, 189, 0.82);
         font-size: 13px;
       }
 
@@ -445,7 +631,6 @@
         align-items: center;
       }
 
-      /* ── Animations ── */
       .reveal {
         opacity: 0;
         transform: translateY(30px);
@@ -469,7 +654,10 @@
 
       .stagger.is-visible .reveal-item { opacity: 1; transform: translateY(0); }
 
-      .hero-reveal { opacity: 0; transform: translateY(18px); }
+      .hero-reveal {
+        opacity: 0;
+        transform: translateY(18px);
+      }
 
       .hero-reveal.is-on {
         opacity: 1;
@@ -479,7 +667,10 @@
           transform 900ms var(--ease-out);
       }
 
-      .reveal-text { display: inline-block; white-space: nowrap; }
+      .reveal-text {
+        display: block;
+        white-space: normal;
+      }
 
       .reveal-text .token {
         display: inline-block;
@@ -496,23 +687,77 @@
         transition-delay: var(--d, 0ms);
       }
 
-      /* ── Responsive ── */
+      @media (max-width: 1080px) {
+        .hero-inner,
+        .featured-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
       @media (max-width: 920px) {
-        .hero-inner { grid-template-columns: 1fr; align-items: start; }
-        .projects-grid { grid-template-columns: 1fr; }
+        .nav {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        nav ul { gap: 12px; }
+
+        .hero-proof li,
+        .stats-grid,
+        .selected-grid,
+        .capabilities-grid,
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .hero {
+          padding-top: 98px;
+          padding-bottom: 72px;
+        }
+
+        .hero-aside,
+        .featured-card,
+        .surface,
+        .contact-card {
+          padding: 20px;
+        }
+
+        .diagram-row {
+          grid-template-columns: 1fr;
+        }
+
+        .diagram-link {
+          width: 1px;
+          height: 18px;
+          margin: 0 auto;
+          background: linear-gradient(180deg, rgba(188, 199, 210, 0.15), rgba(188, 199, 210, 0.55));
+        }
+
+        .diagram-link::after {
+          right: -3px;
+          top: auto;
+          bottom: -1px;
+          transform: rotate(135deg);
+        }
       }
 
       @media (prefers-reduced-motion: reduce) {
         html { scroll-behavior: auto; }
+
         .reveal,
         .stagger .reveal-item,
         .hero-reveal,
-        .reveal-text .token {
+        .reveal-text .token,
+        .surface {
           transition: none !important;
           transform: none !important;
           opacity: 1 !important;
         }
-        body::before { opacity: 0.45; }
+
+        body::before,
+        body::after { opacity: 0.45; }
       }
     </style>
   </head>
@@ -521,14 +766,14 @@
       <div class="container">
         <div class="nav">
           <a class="brand" href="#top" aria-label="Back to top">
-            Metron <small>Python & Web Developer</small>
+            <strong>Metron</strong>
+            <small>Systems Portfolio</small>
           </a>
           <nav aria-label="Primary">
             <ul>
-              <li><a href="#about">About</a></li>
-              <li><a href="#projects">Projects</a></li>
-              <li><a href="#stack">Stack</a></li>
-              <li><a href="#channels">Channels</a></li>
+              <li><a href="#about">Profile</a></li>
+              <li><a href="#projects">Flagship</a></li>
+              <li><a href="#stack">Capabilities</a></li>
               <li><a href="#contact">Contact</a></li>
             </ul>
           </nav>
@@ -537,158 +782,353 @@
     </header>
 
     <main id="top">
-      <!-- Hero -->
       <section class="container hero">
         <div class="hero-inner">
-          <div>
+          <div class="hero-copy">
             <div class="hero-reveal" data-hero>
-              <h1 class="reveal-text" data-reveal-text="Metron">Metron</h1>
+              <p class="hero-kicker">Metron / Independent Python engineer</p>
+              <h1 class="reveal-text" data-reveal-text="Systems built to run.">Systems built to run.</h1>
               <p class="hero-subtitle">
-                <strong>Python Developer.</strong> Building real tools.
+                <strong>I design backend systems that stay calm under real usage.</strong> My work lives where
+                Telegram products, async Python services, payment flows, and operator tooling meet.
               </p>
-              <p class="hero-line">I write clean systems — bots, backends, and web.</p>
+              <p class="hero-line">
+                Less demo energy, more signal: shipped automation, disciplined product logic, and web surfaces that
+                feel deliberate.
+              </p>
             </div>
+
+            <ul class="hero-proof reveal stagger" data-reveal data-stagger aria-label="Key strengths">
+              <li class="reveal-item">
+                <span>Focus</span>
+                <strong>Bots, billing engines, admin tooling, service automation</strong>
+              </li>
+              <li class="reveal-item">
+                <span>Strength</span>
+                <strong>Turning messy operational flows into clear product systems</strong>
+              </li>
+              <li class="reveal-item">
+                <span>Approach</span>
+                <strong>Sharp UI on the surface, stable async logic underneath</strong>
+              </li>
+            </ul>
           </div>
+
           <aside class="hero-aside reveal stagger" data-reveal data-stagger>
+            <div class="reveal-item">
+              <p class="panel-label">System snapshot</p>
+              <p class="hero-aside-copy">
+                Metron VPN is the clearest expression of how I like to build: one product, several operational layers,
+                all shaped into something coherent.
+              </p>
+            </div>
+
+            <div class="system-diagram reveal-item" aria-label="System diagram">
+              <div class="diagram-row">
+                <div class="diagram-node">
+                  <strong>Client surface</strong>
+                  <small>Telegram bot and public channel</small>
+                </div>
+                <div class="diagram-link"></div>
+                <div class="diagram-node">
+                  <strong>Control layer</strong>
+                  <small>FSM flows, tickets, operator actions</small>
+                </div>
+              </div>
+              <div class="diagram-row">
+                <div class="diagram-node">
+                  <strong>Billing</strong>
+                  <small>YooKassa, renewals, balance logic</small>
+                </div>
+                <div class="diagram-link"></div>
+                <div class="diagram-node">
+                  <strong>Delivery</strong>
+                  <small>3x-ui orchestration and key rotation</small>
+                </div>
+              </div>
+            </div>
+
             <div class="meta-grid">
               <div class="meta-row reveal-item">
-                <span>Role</span>
-                <strong>Python & Web Developer</strong>
+                <span>Flagship build</span>
+                <strong>Metron VPN</strong>
               </div>
               <div class="meta-row reveal-item">
-                <span>Stack</span>
-                <strong>Python · Web · PostgreSQL</strong>
+                <span>Primary stack</span>
+                <strong>Python, PostgreSQL, aiohttp</strong>
               </div>
               <div class="meta-row reveal-item">
-                <span>GitHub</span>
-                <a href="https://github.com/brabus13372-lab" target="_blank" rel="noreferrer">brabus13372-lab</a>
+                <span>Public trace</span>
+                <a href="https://github.com/brabus13372-lab" target="_blank" rel="noreferrer">github.com/brabus13372-lab</a>
               </div>
             </div>
           </aside>
         </div>
       </section>
 
-      <!-- About -->
       <section id="about" class="section">
         <div class="container">
           <div class="reveal stagger" data-reveal data-stagger>
-            <p class="kicker reveal-item">About</p>
+            <p class="kicker reveal-item">Profile</p>
+            <div class="section-heading reveal-item">
+              <h2>Engineering with taste, not noise.</h2>
+              <p>
+                I build practical systems where the backend is part of the product itself: billing flows, async jobs,
+                Telegram services, and operator interfaces that keep everything readable once the product is live.
+              </p>
+            </div>
             <div class="content reveal-item">
               <p>
-                I focus on Python and web. I build things that actually work — from backend automation to production
-                Telegram services. Currently exploring lower-level languages like Rust and C.
+                My strongest lane today is Python for automation-heavy products and service logic with real operational
+                consequences. I care about clean boundaries, human-friendly tooling, and the kind of rigor that makes a
+                small product feel serious.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Projects -->
       <section id="projects" class="section">
         <div class="container">
           <div class="reveal stagger" data-reveal data-stagger>
-            <p class="kicker reveal-item">Projects</p>
-            <div class="projects-grid">
-              <article class="card reveal-item">
-                <div class="pill">Production · Open Source</div>
-                <h3>Metron VPN</h3>
-                <p>
-                  Telegram bot for automated VLESS/REALITY VPN access via 3x-ui panel. Features: daily billing engine,
-                  YooKassa payments, key rotation, FSM support tickets, global log sanitizer.
-                </p>
-                <div class="stackline">
-                  Python · aiogram 3.x · PostgreSQL · aiohttp · APScheduler · YooKassa
+            <p class="kicker reveal-item">Flagship System</p>
+            <div class="section-heading reveal-item">
+              <h2>Metron VPN</h2>
+              <p>
+                A production Telegram service where bot UX, billing logic, support flows, and infrastructure
+                orchestration all have to work together without turning into operational noise.
+              </p>
+            </div>
+
+            <article class="featured-card reveal-item">
+              <div class="featured-grid">
+                <div class="featured-copy">
+                  <p class="panel-label">What makes it notable</p>
+                  <h3>One product, several operational layers.</h3>
+                  <p>
+                    From daily billing and YooKassa payments to automated VLESS/REALITY access through 3x-ui, the
+                    system is built as a real service instead of a one-off script. It also includes support routing,
+                    key rotation, and log sanitation for safer day-to-day operations.
+                  </p>
+
+                  <div class="stats-grid">
+                    <div class="stat">
+                      <span>Billing</span>
+                      <strong>Daily renewals, balance logic, and payment lifecycle handling</strong>
+                    </div>
+                    <div class="stat">
+                      <span>Automation</span>
+                      <strong>Provisioning and access delivery connected to infrastructure actions</strong>
+                    </div>
+                    <div class="stat">
+                      <span>Support</span>
+                      <strong>FSM-based ticket routing and clean operator flows</strong>
+                    </div>
+                    <div class="stat">
+                      <span>Safety</span>
+                      <strong>Global log sanitation and predictable service behavior</strong>
+                    </div>
+                  </div>
+
+                  <div class="links-row">
+                    <a
+                      class="link primary-link"
+                      href="https://github.com/brabus13372-lab/Metron-vpn"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      View GitHub <span class="arrow">↗</span>
+                    </a>
+                    <a class="link" href="https://t.me/metronVPN" target="_blank" rel="noreferrer">
+                      Channel <span class="arrow">↗</span>
+                    </a>
+                    <a class="link" href="https://t.me/MetronVPN_bot" target="_blank" rel="noreferrer">
+                      Bot <span class="arrow">↗</span>
+                    </a>
+                  </div>
                 </div>
+
+                <aside class="featured-panel">
+                  <p class="panel-label">System layers</p>
+                  <ul class="detail-list">
+                    <li>
+                      <strong>Client entry</strong>
+                      <span>Telegram surfaces for onboarding, balance management, and subscription actions.</span>
+                    </li>
+                    <li>
+                      <strong>Service core</strong>
+                      <span>Async Python logic for state handling, scheduling, and product rules.</span>
+                    </li>
+                    <li>
+                      <strong>Commercial logic</strong>
+                      <span>Payments, renewals, and billing behavior wired into user-facing flows.</span>
+                    </li>
+                    <li>
+                      <strong>Infrastructure bridge</strong>
+                      <span>3x-ui interactions, access delivery, and security-conscious operations.</span>
+                    </li>
+                  </ul>
+                </aside>
+              </div>
+            </article>
+
+            <div class="selected-grid">
+              <article class="surface reveal-item">
+                <p class="surface-label">Selected Web Work</p>
+                <h3>nvfstudio</h3>
+                <p>
+                  A client-facing landing page shaped around visual rhythm, conversion clarity, and a restrained
+                  editorial feel instead of generic marketing noise.
+                </p>
+                <ul class="detail-list">
+                  <li>
+                    <strong>Role</strong>
+                    <span>Design-sensitive front-end implementation for a real client business.</span>
+                  </li>
+                  <li>
+                    <strong>Surface</strong>
+                    <span>HTML, CSS, and JavaScript with a clear visual hierarchy.</span>
+                  </li>
+                </ul>
                 <div class="links-row">
-                  <a class="link" href="https://github.com/brabus13372-lab/Metron-vpn" target="_blank" rel="noreferrer">
-                    GitHub <span class="arrow">↗</span>
+                  <a class="link" href="https://nvfstudio.ru" target="_blank" rel="noreferrer">
+                    Visit site <span class="arrow">↗</span>
                   </a>
                 </div>
               </article>
 
-              <article class="card reveal-item">
-                <div class="pill">Web · Client Work</div>
-                <h3>nvfstudio</h3>
-                <p>Landing page for an art & design business. Clean, visual, conversion-focused.</p>
-                <div class="stackline">HTML · CSS · JavaScript</div>
-                <div class="links-row">
-                  <a class="link" href="https://nvfstudio.ru" target="_blank" rel="noreferrer">
-                    Live <span class="arrow">↗</span>
-                  </a>
-                </div>
+              <article class="surface reveal-item">
+                <p class="surface-label">Working Style</p>
+                <h3>How I like to build.</h3>
+                <p>
+                  The goal is not to add complexity. The goal is to make real systems easier to operate, reason about,
+                  and trust after launch.
+                </p>
+                <ul class="detail-list">
+                  <li>
+                    <strong>Architecture</strong>
+                    <span>Clear responsibilities over brittle glue code.</span>
+                  </li>
+                  <li>
+                    <strong>Operations</strong>
+                    <span>Admin and support flows treated as product surfaces, not afterthoughts.</span>
+                  </li>
+                  <li>
+                    <strong>Presentation</strong>
+                    <span>Interfaces should feel calm, precise, and intentional.</span>
+                  </li>
+                </ul>
               </article>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Stack -->
       <section id="stack" class="section">
         <div class="container">
           <div class="reveal stagger" data-reveal data-stagger>
-            <p class="kicker reveal-item">Stack</p>
-            <ul class="tags-list" aria-label="Tech stack">
-              <li class="tag reveal-item">Python</li>
-              <li class="tag reveal-item">HTML/CSS</li>
-              <li class="tag reveal-item">PostgreSQL</li>
-              <li class="tag reveal-item">aiogram</li>
-              <li class="tag reveal-item">aiohttp</li>
-              <li class="tag reveal-item">Linux</li>
-              <li class="tag reveal-item">asyncio</li>
-              <li class="tag reveal-item">APScheduler</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+            <p class="kicker reveal-item">Capabilities</p>
+            <div class="section-heading reveal-item">
+              <h2>Where I create the most leverage.</h2>
+              <p>
+                I am strongest where product logic and systems logic meet: sharp user-facing flows on the surface,
+                disciplined backend behavior underneath.
+              </p>
+            </div>
 
-      <!-- Channels -->
-      <section id="channels" class="section">
-        <div class="container">
-          <div class="reveal stagger" data-reveal data-stagger>
-            <p class="kicker reveal-item">Channels</p>
-            <div class="projects-grid">
-              <article class="card tilt-card reveal-item">
-                <div class="pill">Telegram · Channel</div>
-                <h3>MetronVPN</h3>
-                <p>Official channel. Updates, announcements and service news.</p>
-                <div class="links-row">
-                  <a class="link" href="https://t.me/metronVPN" target="_blank" rel="noreferrer">
-                    Open <span class="arrow">↗</span>
-                  </a>
-                </div>
+            <div class="capabilities-grid">
+              <article class="surface reveal-item">
+                <p class="surface-label">Backend Automation</p>
+                <h3>Async Python services</h3>
+                <p>Schedulers, workflow logic, integrations, and background processes built for actual usage.</p>
+                <ul class="detail-list">
+                  <li>
+                    <strong>Tooling</strong>
+                    <span>aiogram, aiohttp, asyncio, APScheduler</span>
+                  </li>
+                  <li>
+                    <strong>Outcome</strong>
+                    <span>Less manual operations, more predictable service behavior</span>
+                  </li>
+                </ul>
               </article>
 
-              <article class="card tilt-card reveal-item">
-                <div class="pill">Telegram · Bot</div>
-                <h3>@MetronVPN_bot</h3>
-                <p>The bot itself. Connect, manage your subscription and top up balance.</p>
-                <div class="links-row">
-                  <a class="link" href="https://t.me/MetronVPN_bot" target="_blank" rel="noreferrer">
-                    Open <span class="arrow">↗</span>
-                  </a>
-                </div>
+              <article class="surface reveal-item">
+                <p class="surface-label">Commercial Systems</p>
+                <h3>Billing and product logic</h3>
+                <p>Payment flows, renewals, account states, and the business rules that keep services coherent.</p>
+                <ul class="detail-list">
+                  <li>
+                    <strong>Tools</strong>
+                    <span>YooKassa, PostgreSQL, service-side rules, scheduled checks</span>
+                  </li>
+                  <li>
+                    <strong>Priority</strong>
+                    <span>Make monetization logic reliable without making the product feel heavy</span>
+                  </li>
+                </ul>
+              </article>
+
+              <article class="surface reveal-item">
+                <p class="surface-label">Telegram Products</p>
+                <h3>Bot-first service design</h3>
+                <p>User journeys, support flows, admin actions, and delivery steps designed as one connected system.</p>
+                <ul class="detail-list">
+                  <li>
+                    <strong>Focus</strong>
+                    <span>FSM flows, operational clarity, and low-friction interactions</span>
+                  </li>
+                  <li>
+                    <strong>Goal</strong>
+                    <span>Turn chat-based products into something that feels reliable and premium</span>
+                  </li>
+                </ul>
+              </article>
+
+              <article class="surface reveal-item">
+                <p class="surface-label">Web Surfaces</p>
+                <h3>Minimal front-end with intent</h3>
+                <p>Landing pages and product-facing web layers with clean typography, hierarchy, and restraint.</p>
+                <ul class="detail-list">
+                  <li>
+                    <strong>Stack</strong>
+                    <span>HTML, CSS, JavaScript, interface systems, conversion-aware layouts</span>
+                  </li>
+                  <li>
+                    <strong>Taste</strong>
+                    <span>Less decoration, more confidence in structure and pacing</span>
+                  </li>
+                </ul>
               </article>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Contact -->
       <section id="contact" class="section">
         <div class="container">
           <div class="reveal stagger" data-reveal data-stagger>
-            <p class="kicker reveal-item">Contact / Links</p>
+            <p class="kicker reveal-item">Contact</p>
+            <div class="section-heading reveal-item">
+              <h2>Available for sharp work and interesting systems.</h2>
+              <p>
+                If you want a backend-heavy product, Telegram service, or automation layer that feels thought through
+                end-to-end, reach out.
+              </p>
+            </div>
+
             <div class="contact-grid">
-              <div class="contact-row reveal-item">
+              <article class="contact-card reveal-item">
                 <span>GitHub</span>
-                <a href="https://github.com/brabus13372-lab" target="_blank" rel="noreferrer">
-                  github.com/brabus13372-lab
-                </a>
-              </div>
-              <div class="contact-row reveal-item">
+                <a href="https://github.com/brabus13372-lab" target="_blank" rel="noreferrer">github.com/brabus13372-lab</a>
+                <p>Code, experiments, and public repos that show how I think and build.</p>
+              </article>
+
+              <article class="contact-card reveal-item">
                 <span>Telegram</span>
                 <a href="https://t.me/filactery" target="_blank" rel="noreferrer">@filactery</a>
-              </div>
+                <p>The best channel for a direct conversation about product, systems, or collaboration.</p>
+              </article>
             </div>
           </div>
         </div>
@@ -719,12 +1159,18 @@
           const text = el.getAttribute("data-reveal-text") || el.textContent || ""
           el.textContent = ""
           el.classList.add("reveal-text")
-          Array.from(text).forEach((ch, idx) => {
+
+          let delay = 0
+          const words = text.split(/\s+/).filter(Boolean)
+
+          words.forEach((word, idx) => {
             const span = document.createElement("span")
             span.className = "token"
-            span.textContent = ch
-            span.style.setProperty("--d", `${idx * 48}ms`)
+            span.textContent = word
+            span.style.setProperty("--d", `${delay}ms`)
             el.appendChild(span)
+            if (idx < words.length - 1) el.appendChild(document.createTextNode(" "))
+            delay += 110
           })
         })
       }
@@ -774,44 +1220,6 @@
       runHero()
       setYear()
 
-      const setupVisualEnhancements = () => {
-        if (prefersReducedMotion) return
-        if (!window.matchMedia("(pointer: fine)").matches) return
-
-        const noise = document.createElement("div")
-        noise.className = "noise-overlay"
-        document.body.appendChild(noise)
-
-        const glow = document.createElement("div")
-        glow.className = "cursor-glow"
-        document.body.appendChild(glow)
-
-        document.addEventListener("mousemove", (e) => {
-          glow.style.left = e.clientX + "px"
-          glow.style.top = e.clientY + "px"
-        })
-
-        const applyTilt = (el, maxTilt = 8) => {
-          el.addEventListener("mousemove", (e) => {
-            const rect = el.getBoundingClientRect()
-            const x = (e.clientX - rect.left) / rect.width - 0.5
-            const y = (e.clientY - rect.top) / rect.height - 0.5
-            el.style.transition = "transform 0.12s ease"
-            el.style.transform = `perspective(800px) rotateY(${x * maxTilt}deg) rotateX(${-y * maxTilt}deg) scale(1.02)`
-          })
-          el.addEventListener("mouseleave", () => {
-            el.style.transition = "transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)"
-            el.style.removeProperty("transform")
-            window.setTimeout(() => el.style.removeProperty("transition"), 520)
-          })
-        }
-
-        document.querySelectorAll(".card, .tilt-card").forEach((el) => applyTilt(el, 8))
-        const nav = document.querySelector(".nav")
-        if (nav) applyTilt(nav, 3)
-      }
-
-      setupVisualEnhancements()
     </script>
   </body>
 </html>
