@@ -371,6 +371,70 @@ main {
   margin-top: 24px;
 }
 
+.project-split {
+  align-items: stretch;
+  margin-top: 4px;
+}
+
+.project-intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 28px;
+  min-height: 100%;
+}
+
+.project-intro .screen-title {
+  max-width: 100%;
+}
+
+.btn-visit {
+  align-self: flex-start;
+  min-height: 56px;
+  padding: 0 30px;
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.project-card {
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+}
+
+.project-card > p.mono {
+  margin: 0 0 16px 0;
+  color: var(--text-faint);
+}
+
+.project-card > p:not(.mono) {
+  margin: 0;
+  font-size: clamp(16px, 2vw, 18px);
+  line-height: 1.8;
+  color: var(--text-soft);
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 22px 0 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.project-tags li {
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
 .text-link {
   position: relative;
   display: inline-flex;
@@ -624,8 +688,13 @@ main {
 
   .split,
   .capability-grid,
-  .contact-layout {
+  .contact-layout,
+  .project-split {
     grid-template-columns: 1fr;
+  }
+
+  .project-intro {
+    min-height: auto;
   }
 
   .hero .screen-title {
